@@ -11,10 +11,17 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
     
+      - name: login
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+    
       - name: build
         uses: devcontainers/ci@v0.3
         with:
           subFolder: images/devenv-main/
-          imageName: ghcr.io/ha07z7xe/devenv-main
+          imageName: ghcr.io/ha07z7xe/devcontainers/devenv-main
           # cacheFrom: ghcr.io/ha07z7xe/devenv-main
           push: always
