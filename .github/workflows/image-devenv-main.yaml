@@ -25,6 +25,6 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           subFolder: images/devenv-main/
-          imageName: ghcr.io/ha07z7xe/devcontainers/devenv-main
+          imageName: ghcr.io/ha07z7xe/devenv-main
           # cacheFrom: ghcr.io/ha07z7xe/devenv-main
           push: always
