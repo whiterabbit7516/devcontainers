@@ -11,12 +11,11 @@
 # FROM mcr.microsoft.com/devcontainers/universal:2-linux
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
-
 ##########################################
 # users
 ##########################################
 
-RUN groupadd -r containergroup && useradd -r -g containergroup --create-home containeruser
+# RUN groupadd -r containergroup && useradd -r -g containergroup --create-home containeruser
 
 ##########################################
 # context
