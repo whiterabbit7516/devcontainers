@@ -124,6 +124,13 @@ RUN sudo npm install -g typescript \
   && tsc --version
 
 ##########################################
+# devcontainers
+##########################################
+
+RUN sudo npm install -g @devcontainers/cli \
+  && devcontainer --version
+
+##########################################
 # scripts
 ##########################################
 
