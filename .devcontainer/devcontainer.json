@@ -9,7 +9,9 @@
     // "--cap-add=NET_RAW",
     // "--cap-add=NET_ADMIN"
   ],
-  "initializeCommand": "docker pull ghcr.io/ha07z7xe/devcontainers/devenv-main:latest"
+  "initializeCommand": [
+    "docker", "pull", "ghcr.io/ha07z7xe/devcontainers/devenv-main:latest"
+  ]
   
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
