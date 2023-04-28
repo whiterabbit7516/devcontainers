@@ -10,9 +10,19 @@
     // "--cap-add=NET_ADMIN"
   ],
   "initializeCommand": [
-    "docker", "pull", "ghcr.io/ha07z7xe/devcontainers/devenv-main:latest"
-  ]
-  
+    "docker",
+    "pull",
+    "ghcr.io/ha07z7xe/devcontainers/devenv-main:latest"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "vscodevim.vim"
+      ]
+    }
+  }
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
