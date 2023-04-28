@@ -8,10 +8,10 @@
     "ghcr.io/devcontainers/features/powershell:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/dotnet:1": {
-    "ghcr.io/devcontainers/features/aws-cli:1": {},
-    "ghcr.io/devcontainers/features/docker-outside-of-docker": {},
       "version": "7"
     },
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker": {},
     "ghcr.io/devcontainers/features/node:1": {
       "version": "19",
       "additionalVersions": "18"
