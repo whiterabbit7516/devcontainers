@@ -1,0 +1,11 @@
+{
+  "id": "devenv-main",
+  "version": "1.0.0",
+  "name": "devenv-main",
+  "description": "development container main",
+  "options": {
+  },
+  "platforms": [
+      "Any"
+  ]
+}
