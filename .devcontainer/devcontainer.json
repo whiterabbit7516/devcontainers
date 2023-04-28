@@ -17,18 +17,9 @@
   "customizations": {
     "vscode": {
       "settings": {
+        "window.title": "devcontainers | ${rootName}",
         "terminal.integrated.defaultProfile.linux": "pwsh",
         "terminal.integrated.profiles.linux": {
-          "bash": {
-            "path": "bash",
-            "icon": "terminal-bash"
-          },
-          "zsh": {
-            "path": "zsh"
-          },
-          "fish": {
-            "path": "fish"
-          },
           "tmux": {
             "path": "tmux",
             "icon": "terminal-tmux"
