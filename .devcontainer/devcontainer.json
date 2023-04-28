@@ -2,7 +2,6 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
   "name": "devenv-main",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "ghcr.io/ha07z7xe/devcontainers/devenv-main:latest",
   "runArgs": [
     "--network=host"
@@ -14,11 +13,40 @@
     "pull",
     "ghcr.io/ha07z7xe/devcontainers/devenv-main:latest"
   ],
+  "postCreateCommand": "/usr/bin/pwsh -nop -nol -f /devcontainer/docker-context/postCreate.ps1",
   "customizations": {
     "vscode": {
-      "settings": {},
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "pwsh",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+          },
+          "zsh": {
+            "path": "zsh"
+          },
+          "fish": {
+            "path": "fish"
+          },
+          "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+          },
+          "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell",
+            "args": [
+              "-nol"
+            ]
+          }
+        },
+        "omnisharp.autoStart": false
+      },
       "extensions": [
-        "vscodevim.vim"
+        "vscodevim.vim",
+        "alefragnani.bookmarks",
+        "eamodio.gitlens"
       ]
     }
   }

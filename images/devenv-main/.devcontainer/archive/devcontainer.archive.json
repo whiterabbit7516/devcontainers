@@ -10,27 +10,6 @@
   "workspaceFolder": "/workspaces/main",
 
   "settings": { 
-      "terminal.integrated.profiles.linux": {
-          "bash": {
-              "path": "bash",
-              "icon": "terminal-bash"
-          },
-          "zsh": {
-              "path": "zsh"
-          },
-          "fish": {
-              "path": "fish"
-          },
-          "tmux": {
-              "path": "tmux",
-              "icon": "terminal-tmux"
-          },
-          "pwsh": {
-              "path": "pwsh",
-              "icon": "terminal-powershell",
-              "args": ["-nol"]
-          }
-      },
       "terminal.integrated.defaultProfile.linux": "pwsh",
       "omnisharp.autoStart": false
 
