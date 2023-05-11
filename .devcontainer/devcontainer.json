@@ -17,7 +17,8 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "window.title": "devcontainers | ${rootName}",
+        "window.titleSeparator": " | ",
+        "window.title": "${rootName}${separator}${profileName}",
         "terminal.integrated.defaultProfile.linux": "pwsh",
         "terminal.integrated.profiles.linux": {
           "tmux": {
