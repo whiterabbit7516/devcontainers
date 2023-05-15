@@ -1,0 +1,38 @@
+name: image-devenv-main-arm64
+run-name: "[ref:${{ github.ref }}] [user:${{ github.actor }}]"
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - images/devenv-main-arm64/**
+permissions:
+  contents: read
+  packages: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+    
+      - name: login
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: build
+        uses: devcontainers/ci@v0.3
+        with:
+          subFolder: images/devenv-main-arm64/
+          imageName: ghcr.io/ha07z7xe/devcontainers/devenv-main
+          cacheFrom: ghcr.io/ha07z7xe/devcontainers/devenv-main:arm64
+          push: always
+          platforms: linux/arm64
+          context: .
+          tags: user/app:arm64
+
+
+

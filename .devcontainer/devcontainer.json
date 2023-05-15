@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-  "name": "devenv-main",
+  "name": "devcontainers-main",
   "image": "ghcr.io/ha07z7xe/devcontainers/devenv-main:latest",
   "runArgs": [
     "--network=host"
