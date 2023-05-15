@@ -45,8 +45,12 @@ RUN sudo apt-get update
 # powershell
 ##########################################
 
-RUN sudo apt-get install -y powershell \
-    && pwsh --version
+RUN curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.3.4/powershell-7.3.4-linux-arm64.tar.gz \
+  && sudo mkdir -p /opt/microsoft/powershell/7 \
+  && sudo tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7 \
+  && sudo chmod +x /opt/microsoft/powershell/7/pwsh \
+  && sudo ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh \
+  && pwsh --version
 
 RUN pwsh -noni -nol -nop -c Install-Module PSFzf -Scope AllUsers -Force
 
@@ -66,7 +70,7 @@ RUN sudo apt-get install -y tmux vim ranger fzf file \
 
 RUN sudo apt install -y iputils-ping dnsutils socat ipcalc
 RUN echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
-RUN sudo apt install -y wireshark tshark termshark
+RUN sudo apt install -y tshark termshark
 
 ##########################################
 # linuxbrew
