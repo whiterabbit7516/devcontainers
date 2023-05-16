@@ -29,14 +29,14 @@ USER root
 ##########################################
 
 # microsoft
-RUN sudo apt-get update \
-    && sudo apt-get install -y wget apt-transport-https software-properties-common \
-    && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
-    && sudo dpkg -i packages-microsoft-prod.deb 
+# RUN sudo apt-get update \
+#     && sudo apt-get install -y wget apt-transport-https software-properties-common \
+#     && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
+#     && sudo dpkg -i packages-microsoft-prod.deb 
 
 # hashicorp
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
-    && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+# RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
+#     && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
 # RUN sudo add-apt-repository universe
 RUN sudo apt-get update 
