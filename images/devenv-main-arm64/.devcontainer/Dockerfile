@@ -144,7 +144,7 @@ RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "aw
     && rm -rf aws* \
     && aws --version
 
-RUN sudo pwsh -c Install-Module -Scope AllUsers -Name AWSPowerShell.NetCore -Force
+# RUN sudo pwsh -c Install-Module -Scope AllUsers -Name AWSPowerShell.NetCore -Force
 
 ##########################################
 # scripts
