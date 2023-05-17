@@ -44,29 +44,6 @@ RUN apt install -y redis-tools \
 # kubernetes
 ##########################################
 
-# kubectl
-RUN iwr "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" -outfile kubectl \
-    && chmod +x kubectl \
-    && sudo mv ./kubectl /usr/local/bin/kubectl \
-    && kubectl version --client
-
-# k9s
-RUN iwr https://github.com/derailed/k9s/releases/download/v0.26.0/k9s_Linux_x86_64.tar.gz -outfile k9s.tar.gz \
-    && tar xzf k9s.tar.gz k9s \
-    && mv k9s /usr/local/bin/k9s \
-    && k9s version
-
-# kubectx
-RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.3/kubectx_v0.9.3_linux_x86_64.tar.gz -outfile kubectx.tar.gz \
-    && tar xzf kubectx.tar.gz kubectx \
-    && mv kubectx /usr/local/bin/kubectx \
-    && kubectx --help
-
-# kubens
-RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.3/kubens_v0.9.3_linux_x86_64.tar.gz -outfile kubens.tar.gz \
-    && tar xzf kubens.tar.gz kubens \
-    && mv kubens /usr/local/bin/kubens \
-    && kubens --help
 
 # kustomize
 RUN iwr https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.1.2/kustomize_v4.1.2_linux_amd64.tar.gz -outfile kustomize.tar.gz \
@@ -74,25 +51,11 @@ RUN iwr https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize
     && mv kustomize /usr/local/bin/kustomize \
     && kustomize version
 
-# kubeseal
-RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.18.1/kubeseal-0.18.1-linux-amd64.tar.gz -outfile kubeseal.tar.gz \
-    && tar xzf kubeseal.tar.gz kubeseal \
-    && chmod +x ./kubeseal \
-    && mv kubeseal /usr/local/bin/kubeseal \
-    && kubeseal --version
-
-# helm
-RUN iwr https://get.helm.sh/helm-v3.5.4-linux-amd64.tar.gz -outfile helm.tar.gz \
-    && tar xzf helm.tar.gz linux-amd64/helm \
-    && mv linux-amd64/helm /usr/local/bin/helm \
-    && helm version
-
 # argo cd
 RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.6.0-rc4/argocd-linux-amd64 -o argocd \
     && chmod +x ./argocd \
     && mv ./argocd /usr/local/bin/argocd \
     && argocd version --client
-
 
 # krew
 RUN iwr https://github.com/kubernetes-sigs/krew/releases/download/v0.4.3/krew-linux_amd64.tar.gz -outfile krew.tgz \

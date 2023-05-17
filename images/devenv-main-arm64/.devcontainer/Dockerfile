@@ -177,6 +177,44 @@ RUN sudo apt-get install -y terraform \
 RUN sudo apt-get install -y kubectl \
   && kubectl version --client
 
+# k9s
+RUN iwr https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_arm64.tar.gz -outfile k9s.tar.gz \
+  && tar xzf k9s.tar.gz k9s \
+  && mv k9s /usr/local/bin/k9s \
+  && k9s version
+
+
+# kubectx
+RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx_v0.9.4_linux_arm64.tar.gz -outfile kubectx.tar.gz \
+  && tar xzf kubectx.tar.gz kubectx \
+  && mv kubectx /usr/local/bin/kubectx \
+  && kubectx --help
+
+# kubens
+RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4_linux_arm64.tar.gz -outfile kubectx.tar.gz \
+  && tar xzf kubens.tar.gz kubens \
+  && mv kubens /usr/local/bin/kubens \
+  && kubens --help
+
+# kubeseal
+RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-arm.tar.gz -oufile kubeseal.tar.gz \
+  && tar xzf kubeseal.tar.gz kubeseal \
+  && chmod +x ./kubeseal \
+  && mv kubeseal /usr/local/bin/kubeseal \
+  && kubeseal --version
+
+# helm
+RUN iwr https://get.helm.sh/helm-v3.12.0-linux-arm64.tar.gz -outfile helm.tar.gz \
+  && tar xzf helm.tar.gz linux-arm64/helm \
+  && mv linux-arm64/helm /usr/local/bin/helm \
+  && helm version
+
+# argo cd
+RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.7.2/argocd-linux-arm64 -outfile argocd \
+  && chmod +x ./argocd \
+  && mv ./argocd /usr/local/bin/argocd \
+  && argocd version --client
+
 ##########################################
 # scripts
 ##########################################
