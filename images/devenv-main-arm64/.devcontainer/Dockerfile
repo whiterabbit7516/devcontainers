@@ -156,6 +156,13 @@ RUN sudo apt-get install -y vault \
     && vault version
 
 ##########################################
+# terraform
+##########################################
+
+RUN sudo apt-get install -y terraform \
+    && terraform version
+
+##########################################
 # scripts
 ##########################################
 
