@@ -191,7 +191,7 @@ RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx_v0.9.
   && kubectx --help
 
 # kubens
-RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4_linux_arm64.tar.gz -outfile kubectx.tar.gz \
+RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4_linux_arm64.tar.gz -outfile kubens.tar.gz \
   && tar xzf kubens.tar.gz kubens \
   && mv kubens /usr/local/bin/kubens \
   && kubens --help
