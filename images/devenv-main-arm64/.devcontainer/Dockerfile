@@ -183,7 +183,6 @@ RUN iwr https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_arm6
   && mv k9s /usr/local/bin/k9s \
   && k9s version
 
-
 # kubectx
 RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx_v0.9.4_linux_arm64.tar.gz -outfile kubectx.tar.gz \
   && tar xzf kubectx.tar.gz kubectx \
