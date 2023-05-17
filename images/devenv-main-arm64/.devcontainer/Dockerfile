@@ -164,5 +164,5 @@ USER root
 ##########################################
 
 ENTRYPOINT [ "/bin/pwsh", "-nop", "-nol", "-c"]
-CMD [ "while ($true) {start-sleep 30}" ]
+CMD [ "while ($true) {start-sleep 32}" ]
 WORKDIR /
