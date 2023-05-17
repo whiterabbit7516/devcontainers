@@ -196,7 +196,7 @@ RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4
   && kubens --help
 
 # kubeseal
-RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-arm.tar.gz -oufile kubeseal.tar.gz \
+RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-arm.tar.gz -outfile kubeseal.tar.gz \
   && tar xzf kubeseal.tar.gz kubeseal \
   && chmod +x ./kubeseal \
   && mv kubeseal /usr/local/bin/kubeseal \
