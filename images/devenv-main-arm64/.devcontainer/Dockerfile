@@ -34,8 +34,8 @@ USER root
 #     && sudo dpkg -i packages-microsoft-prod.deb 
 
 # hashicorp
-# RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
-#     && sudo apt-add-repository "deb [arch=arm64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+RUN wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+  && echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
 # RUN sudo add-apt-repository universe
 RUN sudo apt-get update 
@@ -146,6 +146,14 @@ RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "aw
     && aws --version
 
 # RUN sudo pwsh -c Install-Module -Scope AllUsers -Name AWSPowerShell.NetCore -Force
+
+##########################################
+# vault
+##########################################
+
+RUN sudo apt-get install -y vault \
+    && sudo apt-get install --reinstall -y vault \
+    && vault version
 
 ##########################################
 # scripts
