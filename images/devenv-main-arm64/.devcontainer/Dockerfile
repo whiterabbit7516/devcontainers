@@ -34,9 +34,9 @@ USER root
 #     && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
 #     && sudo dpkg -i packages-microsoft-prod.deb 
 
-# hashicorp
-# RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
-#     && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+hashicorp
+RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
+    && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
 # RUN sudo add-apt-repository universe
 RUN sudo apt-get update 
@@ -133,6 +133,18 @@ RUN sudo npm install -g typescript \
 
 RUN sudo npm install -g @devcontainers/cli \
   && devcontainer --version
+
+##########################################
+# aws
+##########################################
+
+RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && sudo ./aws/install \
+    && rm -rf aws* \
+    && aws --version
+
+RUN sudo pwsh -c Install-Module -Scope AllUsers -Name AWSPowerShell.NetCore -Force
 
 ##########################################
 # scripts

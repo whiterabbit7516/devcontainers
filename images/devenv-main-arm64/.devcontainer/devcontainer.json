@@ -8,13 +8,13 @@
     // "ghcr.io/devcontainers/features/powershell:1": {
     //   "modules": "PSFzf"
     // },
-    "ghcr.io/devcontainers/features/github-cli:1": {},
+    // "ghcr.io/devcontainers/features/github-cli:1": {},
     // "ghcr.io/devcontainers/features/rust:1": {},
     // "ghcr.io/devcontainers/features/dotnet:1": {
     //   "version": "7"
     // },
     // "ghcr.io/devcontainers/features/python:1": {},
-    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    // "ghcr.io/devcontainers/features/aws-cli:1": {},
     "ghcr.io/devcontainers/features/docker-outside-of-docker": {},
     "ghcr.io/devcontainers/features/node:1": {
       "version": "19",
