@@ -175,7 +175,7 @@ RUN sudo apt-get install -y terraform \
 ##########################################
 
 RUN sudo apt-get install -y kubectl \
-  && kubectl version
+  && kubectl version --client
 
 ##########################################
 # scripts
