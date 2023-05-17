@@ -98,6 +98,8 @@ RUN pip3 install virtualenv black pandas numpy
 ##########################################
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+RUN cargo --version
+RUN sudo apt-get install -y pkg-config
 
 ##########################################
 # dotnet
@@ -164,5 +166,5 @@ USER root
 ##########################################
 
 ENTRYPOINT [ "/bin/pwsh", "-nop", "-nol", "-c"]
-CMD [ "while ($true) {start-sleep 32}" ]
+CMD [ "while ($true) {start-sleep 30}" ]
 WORKDIR /

@@ -31,17 +31,6 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN sudo apt-get install -y pkg-config
 
 
-##########################################
-# aws
-##########################################
-
-RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -outfile "awscliv2.zip" \
-    && unzip awscliv2.zip \
-    && sudo ./aws/install \
-    && rm -rf aws* \
-    && aws --version
-
-RUN sudo pwsh -c Install-Module -Scope AllUsers -Name AWSPowerShell.NetCore -Force
 
 ##########################################
 # vault
