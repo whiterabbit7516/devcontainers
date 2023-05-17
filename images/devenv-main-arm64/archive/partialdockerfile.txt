@@ -51,12 +51,6 @@ RUN iwr https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize
     && mv kustomize /usr/local/bin/kustomize \
     && kustomize version
 
-# argo cd
-RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.6.0-rc4/argocd-linux-amd64 -o argocd \
-    && chmod +x ./argocd \
-    && mv ./argocd /usr/local/bin/argocd \
-    && argocd version --client
-
 # krew
 RUN iwr https://github.com/kubernetes-sigs/krew/releases/download/v0.4.3/krew-linux_amd64.tar.gz -outfile krew.tgz \
   && tar xzf krew.tgz ./krew-linux_amd64 \
