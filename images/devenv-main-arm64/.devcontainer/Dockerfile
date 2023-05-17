@@ -28,14 +28,22 @@ USER root
 ##########################################
 
 # microsoft
-# RUN sudo apt-get update \
-#     && sudo apt-get install -y wget apt-transport-https software-properties-common \
-#     && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
-#     && sudo dpkg -i packages-microsoft-prod.deb 
+RUN sudo apt-get update \
+  && sudo apt-get install -y wget apt-transport-https software-properties-common \
+  && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
+  && sudo dpkg -i packages-microsoft-prod.deb \
+  && apt-get update
 
 # hashicorp
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
-  && echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+  && echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list \
+  && apt-get update
+
+# kubernetes
+RUN apt-get install -y ca-certificates curl \
+  && curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+  && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
+  && apt-get update
 
 # RUN sudo add-apt-repository universe
 RUN sudo apt-get update 
@@ -60,8 +68,8 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 ##########################################
 
 RUN sudo apt-get install -y tmux vim ranger fzf file \
-    && tmux -V \
-    && fzf --version
+  && tmux -V \
+  && fzf --version
 
 ##########################################
 # network utilities
@@ -88,7 +96,7 @@ RUN sudo apt install -y tshark termshark
 
 RUN sudo apt install -y python3-pip python3.10
 RUN python3 --version \
-    && pip3 --version
+  && pip3 --version
 
 RUN pip3 install virtualenv black pandas numpy
 
@@ -105,21 +113,21 @@ RUN sudo apt-get install -y pkg-config
 ##########################################
 
 RUN sudo apt-get install -y dotnet-sdk-6.0 \
-    && dotnet --version
+  && dotnet --version
 
 ##########################################
 # npm
 ##########################################
 
 RUN sudo apt install -y npm \
-    && npm version
+  && npm version
 
 RUN npm cache clean -f \
-    && npm install -g n \
-    && n stable
+  && npm install -g n \
+  && n stable
 
 RUN npm install --global yarn \
-    && yarn --version
+  && yarn --version
 
 ##########################################
 # typescript
@@ -140,10 +148,10 @@ RUN sudo npm install -g @devcontainers/cli \
 ##########################################
 
 RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "awscliv2.zip" \
-    && unzip awscliv2.zip \
-    && sudo ./aws/install \
-    && rm -rf aws* \
-    && aws --version
+  && unzip awscliv2.zip \
+  && sudo ./aws/install \
+  && rm -rf aws* \
+  && aws --version
 
 # RUN sudo pwsh -c Install-Module -Scope AllUsers -Name AWSPowerShell.NetCore -Force
 
@@ -152,15 +160,22 @@ RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "aw
 ##########################################
 
 RUN sudo apt-get install -y vault \
-    && sudo apt-get install --reinstall -y vault \
-    && vault version
+  && sudo apt-get install --reinstall -y vault \
+  && vault version
 
 ##########################################
 # terraform
 ##########################################
 
 RUN sudo apt-get install -y terraform \
-    && terraform version
+  && terraform version
+
+##########################################
+# kubernetes
+##########################################
+
+RUN sudo apt-get install -y kubectl \
+  && kubectl version
 
 ##########################################
 # scripts
