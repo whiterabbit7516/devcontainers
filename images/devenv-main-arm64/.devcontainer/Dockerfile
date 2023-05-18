@@ -48,7 +48,7 @@ RUN apt-get install -y ca-certificates curl \
 # teleport
 RUN sudo curl https://apt.releases.teleport.dev/gpg -o /usr/share/keyrings/teleport-archive-keyring.asc \
   && . /etc/os-release \
-  && "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v13" \
+  && echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v13" \
   | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null \
   && apt-get update
 
