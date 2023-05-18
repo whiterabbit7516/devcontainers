@@ -45,6 +45,13 @@ RUN apt-get install -y ca-certificates curl \
   && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
   && apt-get update
 
+# teleport
+RUN sudo curl https://apt.releases.teleport.dev/gpg -o /usr/share/keyrings/teleport-archive-keyring.asc \
+  && source /etc/os-release \
+  && "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v13" \
+  | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null \
+  && apt-get update
+
 # RUN sudo add-apt-repository universe
 RUN sudo apt-get update 
 
@@ -213,6 +220,15 @@ RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.7.2/argocd-linu
   && chmod +x ./argocd \
   && mv ./argocd /usr/local/bin/argocd \
   && argocd version --client
+
+##########################################
+# teleport
+##########################################
+
+RUN sudo apt-get install -y teleport \
+  && teleport version \
+  && tsh version \
+  && tctl version
 
 ##########################################
 # scripts
