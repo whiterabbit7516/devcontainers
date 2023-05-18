@@ -76,7 +76,7 @@ RUN sudo apt-get install -y tmux vim ranger fzf file \
   && tmux -V \
   && fzf --version
 
-RUN Install-Module PSFzf -Scope AllUsers -Force
+RUN Install-Module PSFzf -Force
 
 ##########################################
 # network utilities
