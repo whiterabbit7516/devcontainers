@@ -94,6 +94,8 @@ RUN pip3 install virtualenv black pandas numpy
 ##########################################
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+RUN /root/.cargo/bin/cargo version
+RUN sudo apt-get install -y pkg-config
 
 ##########################################
 # dotnet
