@@ -29,17 +29,19 @@ USER root
 ##########################################
 
 # microsoft
-# RUN sudo apt-get update \
-#   && sudo apt-get install -y wget apt-transport-https software-properties-common \
-#   && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
-#   && sudo dpkg -i packages-microsoft-prod.deb 
+RUN sudo apt-get update \
+  && sudo apt-get install -y wget apt-transport-https software-properties-common \
+  && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
+  && sudo dpkg -i packages-microsoft-prod.deb 
 
 ##########################################
 # dotnet
 ##########################################
+COPY etc.apt.preferences /etc/apt/preferences
+RUN cat /etc/apt/preferences
 
 RUN sudo apt-get update
-RUN sudo apt-get install -y dotnet-sdk-7.0
+RUN sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-7.0
 RUN dotnet --list-sdks
 RUN dotnet --version
 
