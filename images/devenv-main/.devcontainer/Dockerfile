@@ -30,13 +30,13 @@ USER root
 
 # microsoft
 RUN sudo apt-get update \
-    && sudo apt-get install -y wget apt-transport-https software-properties-common \
-    && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
-    && sudo dpkg -i packages-microsoft-prod.deb 
+  && sudo apt-get install -y wget apt-transport-https software-properties-common \
+  && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
+  && sudo dpkg -i packages-microsoft-prod.deb 
 
 # hashicorp
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
-    && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
 # RUN sudo add-apt-repository universe
 RUN sudo apt-get update 
@@ -46,7 +46,7 @@ RUN sudo apt-get update
 ##########################################
 
 RUN sudo apt-get install -y powershell \
-    && pwsh --version
+  && pwsh --version
 
 RUN pwsh -noni -nol -nop -c Install-Module PSFzf -Scope AllUsers -Force
 
@@ -57,8 +57,8 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 ##########################################
 
 RUN sudo apt-get install -y tmux vim ranger fzf file \
-    && tmux -V \
-    && fzf --version
+  && tmux -V \
+  && fzf --version
 
 ##########################################
 # network utilities
@@ -85,7 +85,7 @@ RUN sudo apt install -y wireshark tshark termshark
 
 RUN sudo apt install -y python3-pip python3.10
 RUN python3 --version \
-    && pip3 --version
+  && pip3 --version
 
 RUN pip3 install virtualenv black pandas numpy
 
@@ -102,21 +102,22 @@ RUN sudo apt-get install -y pkg-config
 ##########################################
 
 RUN sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-7.0 \
-    && dotnet --version
+  && start-sleep 2 \
+  && dotnet --version
 
 ##########################################
 # npm
 ##########################################
 
 RUN sudo apt install -y npm \
-    && npm version
+  && npm version
 
 RUN npm cache clean -f \
-    && npm install -g n \
-    && n stable
+  && npm install -g n \
+  && n stable
 
 RUN npm install --global yarn \
-    && yarn --version
+  && yarn --version
 
 ##########################################
 # typescript
