@@ -34,6 +34,15 @@ RUN sudo apt-get update \
   && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
   && sudo dpkg -i packages-microsoft-prod.deb 
 
+##########################################
+# dotnet
+##########################################
+
+RUN sudo apt-get update
+RUN sudo apt-get install -y dotnet-sdk-7.0
+RUN dotnet --list-sdks
+RUN dotnet --version
+
 # hashicorp
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
   && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
@@ -101,8 +110,8 @@ RUN sudo apt-get install -y pkg-config
 # dotnet
 ##########################################
 
-RUN sudo apt-get update \
-  && sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-7.0
+RUN sudo apt-get install -y dotnet-sdk-7.0
+RUN dotnet --list-sdks
 RUN dotnet --version
 
 ##########################################
