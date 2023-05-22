@@ -102,8 +102,8 @@ RUN sudo apt-get install -y pkg-config
 ##########################################
 
 RUN sudo apt-get update \
-  && sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-7.0 \
-  && dotnet --version
+  && sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-7.0
+RUN dotnet --version
 
 ##########################################
 # npm
