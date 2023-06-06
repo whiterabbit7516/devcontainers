@@ -45,6 +45,7 @@ RUN apt-get install -y ca-certificates curl \
     && curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
     && apt-get update
+
 # teleport
 RUN sudo curl https://apt.releases.teleport.dev/gpg -o /usr/share/keyrings/teleport-archive-keyring.asc \
     && . /etc/os-release \
@@ -206,8 +207,8 @@ RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4
 RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-arm.tar.gz -outfile kubeseal.tar.gz \
     && tar xzf kubeseal.tar.gz kubeseal \
     && chmod +x ./kubeseal \
-    && mv kubeseal /usr/local/bin/kubeseal \
-    && kubeseal --version
+    && mv kubeseal /usr/local/bin/kubeseal
+    # && kubeseal --version
 
 # helm
 RUN iwr https://get.helm.sh/helm-v3.12.0-linux-arm64.tar.gz -outfile helm.tar.gz \
