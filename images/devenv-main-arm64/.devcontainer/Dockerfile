@@ -29,28 +29,28 @@ USER root
 
 # microsoft
 RUN sudo apt-get update \
-  && sudo apt-get install -y wget apt-transport-https software-properties-common \
-  && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
-  && sudo dpkg -i packages-microsoft-prod.deb \
-  && apt-get update
+    && sudo apt-get install -y wget apt-transport-https software-properties-common \
+    && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
+    && sudo dpkg -i packages-microsoft-prod.deb \
+    && apt-get update
 
 # hashicorp
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
-  && echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list \
-  && apt-get update
+    && echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list \
+    && apt-get update
 
 # kubernetes
 RUN apt-get install -y ca-certificates curl \
-  && curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg \
-  && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
-  && apt-get update
+    && curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
+    && apt-get update
 
 # teleport
 RUN sudo curl https://apt.releases.teleport.dev/gpg -o /usr/share/keyrings/teleport-archive-keyring.asc \
-  && . /etc/os-release \
-  && echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v13" \
-  | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null \
-  && apt-get update
+    && . /etc/os-release \
+    && echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v13" \
+    | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null \
+    && apt-get update
 
 # RUN sudo add-apt-repository universe
 RUN sudo apt-get update 
@@ -60,11 +60,11 @@ RUN sudo apt-get update
 ##########################################
 
 RUN curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.3.4/powershell-7.3.4-linux-arm64.tar.gz \
-  && sudo mkdir -p /opt/microsoft/powershell/7 \
-  && sudo tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7 \
-  && sudo chmod +x /opt/microsoft/powershell/7/pwsh \
-  && sudo ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh \
-  && pwsh --version
+    && sudo mkdir -p /opt/microsoft/powershell/7 \
+    && sudo tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7 \
+    && sudo chmod +x /opt/microsoft/powershell/7/pwsh \
+    && sudo ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh \
+    && pwsh --version
 
 SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 
@@ -73,8 +73,8 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 ##########################################
 
 RUN sudo apt-get install -y tmux vim ranger fzf file \
-  && tmux -V \
-  && fzf --version
+    && tmux -V \
+    && fzf --version
 
 # RUN Install-Module PSFzf -Force
 
@@ -103,7 +103,7 @@ RUN sudo apt install -y tshark termshark
 
 RUN sudo apt install -y python3-pip python3.10
 RUN python3 --version \
-  && pip3 --version
+    && pip3 --version
 
 RUN pip3 install virtualenv black pandas numpy
 
@@ -120,45 +120,45 @@ RUN sudo apt-get install -y pkg-config
 ##########################################
 
 RUN sudo apt-get install -y dotnet-sdk-6.0 \
-  && dotnet --version
+    && dotnet --version
 
 ##########################################
 # npm
 ##########################################
 
 RUN sudo apt install -y npm \
-  && npm version
+    && npm version
 
 RUN npm cache clean -f \
-  && npm install -g n \
-  && n stable
+    && npm install -g n \
+    && n stable
 
 RUN npm install --global yarn \
-  && yarn --version
+    && yarn --version
 
 ##########################################
 # typescript
 ##########################################
 
 RUN sudo npm install -g typescript \
-  && tsc --version
+    && tsc --version
 
 ##########################################
 # devcontainers
 ##########################################
 
 RUN sudo npm install -g @devcontainers/cli \
-  && devcontainer --version
+    && devcontainer --version
 
 ##########################################
 # aws
 ##########################################
 
 RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "awscliv2.zip" \
-  && unzip awscliv2.zip \
-  && sudo ./aws/install \
-  && rm -rf aws* \
-  && aws --version
+    && unzip awscliv2.zip \
+    && sudo ./aws/install \
+    && rm -rf aws* \
+    && aws --version
 
 # RUN sudo pwsh -c Install-Module -Scope AllUsers -Name AWSPowerShell.NetCore -Force
 
@@ -167,68 +167,68 @@ RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "aw
 ##########################################
 
 RUN sudo apt-get install -y vault \
-  && sudo apt-get install --reinstall -y vault \
-  && vault version
+    && sudo apt-get install --reinstall -y vault \
+    && vault version
 
 ##########################################
 # terraform
 ##########################################
 
 RUN sudo apt-get install -y terraform \
-  && terraform version
+    && terraform version
 
 ##########################################
 # kubernetes
 ##########################################
 
 RUN sudo apt-get install -y kubectl \
-  && kubectl version --client
+    && kubectl version --client
 
 # k9s
 RUN iwr https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_arm64.tar.gz -outfile k9s.tar.gz \
-  && tar xzf k9s.tar.gz k9s \
-  && mv k9s /usr/local/bin/k9s \
-  && k9s version
+    && tar xzf k9s.tar.gz k9s \
+    && mv k9s /usr/local/bin/k9s \
+    && k9s version
 
 # kubectx
 RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx_v0.9.4_linux_arm64.tar.gz -outfile kubectx.tar.gz \
-  && tar xzf kubectx.tar.gz kubectx \
-  && mv kubectx /usr/local/bin/kubectx \
-  && kubectx --help
+    && tar xzf kubectx.tar.gz kubectx \
+    && mv kubectx /usr/local/bin/kubectx \
+    && kubectx --help
 
 # kubens
 RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4_linux_arm64.tar.gz -outfile kubens.tar.gz \
-  && tar xzf kubens.tar.gz kubens \
-  && mv kubens /usr/local/bin/kubens \
-  && kubens --help
+    && tar xzf kubens.tar.gz kubens \
+    && mv kubens /usr/local/bin/kubens \
+    && kubens --help
 
-# # kubeseal
-# RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-arm.tar.gz -outfile kubeseal.tar.gz \
-#   && tar xzf kubeseal.tar.gz kubeseal \
-#   && chmod +x ./kubeseal \
-#   && mv kubeseal /usr/local/bin/kubeseal \
-#   && kubeseal --version
+# kubeseal
+RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-arm.tar.gz -outfile kubeseal.tar.gz \
+    && tar xzf kubeseal.tar.gz kubeseal \
+    && chmod +x ./kubeseal \
+    && mv kubeseal /usr/local/bin/kubeseal \
+    && kubeseal --version
 
 # helm
 RUN iwr https://get.helm.sh/helm-v3.12.0-linux-arm64.tar.gz -outfile helm.tar.gz \
-  && tar xzf helm.tar.gz linux-arm64/helm \
-  && mv linux-arm64/helm /usr/local/bin/helm \
-  && helm version
+    && tar xzf helm.tar.gz linux-arm64/helm \
+    && mv linux-arm64/helm /usr/local/bin/helm \
+    && helm version
 
 # argo cd
 RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.7.2/argocd-linux-arm64 -outfile argocd \
-  && chmod +x ./argocd \
-  && mv ./argocd /usr/local/bin/argocd \
-  && argocd version --client
+    && chmod +x ./argocd \
+    && mv ./argocd /usr/local/bin/argocd \
+    && argocd version --client
 
 ##########################################
 # teleport
 ##########################################
 
 RUN sudo apt-get install -y teleport \
-  && teleport version \
-  && tsh version \
-  && tctl version
+    && teleport version \
+    && tsh version \
+    && tctl version
 
 ##########################################
 # scripts
