@@ -249,6 +249,9 @@ RUN iwr https://github.com/fullstorydev/grpcui/releases/download/v1.3.1/grpcui_1
     && mv ./grpcui /usr/local/bin/grpcui \
     && grpcui -version
 
+# protobuf libs
+RUN sudo apt install -y protobuf-compiler protobuf-compiler-grpc libprotobuf-dev
+
 ##########################################
 # scripts
 ##########################################
