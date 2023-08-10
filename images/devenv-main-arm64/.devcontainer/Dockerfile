@@ -242,6 +242,13 @@ RUN iwr https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl
     && mv ./grpcurl /usr/local/bin/grpcurl \
     && grpcurl -version
 
+# grpcui
+RUN iwr https://github.com/fullstorydev/grpcui/releases/download/v1.3.1/grpcui_1.3.1_linux_arm64.tar.gz -outfile grpcui.tar.gz \
+    && tar xzf grpcui.tar.gz \
+    && chmod +x ./grpcui \
+    && mv ./grpcui /usr/local/bin/grpcui \
+    && grpcui -version
+
 ##########################################
 # scripts
 ##########################################
