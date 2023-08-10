@@ -73,7 +73,7 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 # core utilities
 ##########################################
 
-RUN sudo apt-get install -y tmux vim ranger fzf file \
+RUN sudo apt-get install -y tmux vim ranger fzf file pciutils \
     && tmux -V \
     && fzf --version
 
@@ -230,6 +230,17 @@ RUN sudo apt-get install -y teleport \
     && teleport version \
     && tsh version \
     && tctl version
+
+##########################################
+# grpc
+##########################################
+
+# grpcurl
+RUN iwr https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_arm64.tar.gz -outfile grpcurl.tar.gz \
+    && tar xzf grpcurl.tar.gz \
+    && chmod +x ./grpcurl \
+    && mv ./grpcurl /usr/local/bin/grpcurl \
+    && grpcurl -version
 
 ##########################################
 # scripts

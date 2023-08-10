@@ -57,7 +57,7 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 # core utilities
 ##########################################
 
-RUN sudo apt-get install -y tmux vim ranger fzf file \
+RUN sudo apt-get install -y tmux vim ranger fzf file pciutils \
   && tmux -V \
   && fzf --version
 
