@@ -81,16 +81,6 @@ RUN sudo apt install -y wireshark tshark termshark
 #     && brew update
 
 ##########################################
-# python
-##########################################
-
-RUN sudo apt install -y python3-pip python3.10
-RUN python3 --version \
-  && pip3 --version
-
-RUN pip3 install virtualenv black pandas numpy
-
-##########################################
 # rust
 ##########################################
 
@@ -124,8 +114,19 @@ RUN npm install --global yarn \
 # typescript
 ##########################################
 
-RUN sudo npm install -g typescript \
-  && tsc --version
+RUN sudo npm install -g typescript ts-node \
+  && tsc --version \
+  && ts-node --version
+
+##########################################
+# python
+##########################################
+
+RUN sudo apt install -y python3-pip python3.10
+RUN python3 --version \
+  && pip3 --version
+
+RUN pip3 install virtualenv black pandas numpy
 
 ##########################################
 # devcontainers
