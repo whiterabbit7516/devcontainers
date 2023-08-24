@@ -3,6 +3,7 @@
 ##########################################
 
 # ARG VARIANT="focal"
+ARG INVALIDATECACHE="counter-1"
 
 ##########################################
 # base image
