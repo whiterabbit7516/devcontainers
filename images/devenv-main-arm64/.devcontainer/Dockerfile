@@ -3,13 +3,13 @@
 ##########################################
 
 # ARG VARIANT="focal"
-ARG INVALIDATECACHE="counter-1"
 
 ##########################################
 # base image
 ##########################################
 
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
+ARG INVALIDATECACHE="counter-1"
 
 ##########################################
 # users

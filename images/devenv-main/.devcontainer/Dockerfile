@@ -3,7 +3,6 @@
 ##########################################
 
 # ARG VARIANT="focal"
-ARG INVALIDATECACHE="counter-1"
 
 ##########################################
 # base image
@@ -15,6 +14,7 @@ ARG INVALIDATECACHE="counter-1"
 
 # FROM mcr.microsoft.com/devcontainers/universal:2-linux
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
+ARG INVALIDATECACHE="counter-1"
 
 ##########################################
 # users
