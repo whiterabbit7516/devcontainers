@@ -74,7 +74,7 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 # core utilities
 ##########################################
 
-RUN sudo apt-get install -y tmux vim ranger fzf file pciutils \
+RUN sudo apt-get install -y tmux vim ranger fzf file pciutils direnv \
     && tmux -V \
     && fzf --version
 
@@ -129,6 +129,9 @@ RUN npm cache clean -f \
 RUN npm install --global yarn \
     && yarn --version
 
+RUN npm install -g pnpm \
+    && pnpm --version
+
 ##########################################
 # typescript
 ##########################################
@@ -136,6 +139,14 @@ RUN npm install --global yarn \
 RUN sudo npm install -g typescript ts-node \
   && tsc --version \
   && ts-node --version
+
+##########################################
+# go
+##########################################
+
+RUN iwr https://go.dev/dl/go1.21.6.linux-arm64.tar.gz -outfile go.tar.gz \
+  && tar -C /usr/local -xzf ./go.tar.gz \
+  && /usr/local/go/bin/go version
 
 ##########################################
 # python
