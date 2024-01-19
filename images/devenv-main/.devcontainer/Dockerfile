@@ -62,7 +62,7 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 # core utilities
 ##########################################
 
-RUN sudo apt-get install -y tmux vim ranger fzf file pciutils \
+RUN sudo apt-get install -y tmux vim ranger fzf file pciutils direnv \
   && tmux -V \
   && fzf --version
 
@@ -102,6 +102,13 @@ RUN sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-7.0 \
   && dotnet --version
 
 ##########################################
+# java
+##########################################
+
+RUN sudo apt-get install -y openjdk-8-jdk \
+  && javac -version
+
+##########################################
 # npm
 ##########################################
 
@@ -115,6 +122,9 @@ RUN npm cache clean -f \
 RUN npm install --global yarn \
   && yarn --version
 
+RUN npm install -g pnpm \
+    && pnpm --version
+
 ##########################################
 # typescript
 ##########################################
@@ -122,6 +132,14 @@ RUN npm install --global yarn \
 RUN sudo npm install -g typescript ts-node \
   && tsc --version \
   && ts-node --version
+
+##########################################
+# go
+##########################################
+
+RUN iwr https://go.dev/dl/go1.21.6.linux-amd64.tar.gz -outfile go.tar.gz \
+  && tar -C /usr/local -xzf ./go.tar.gz \
+  && /usr/local/go/bin/go version
 
 ##########################################
 # python
