@@ -265,6 +265,13 @@ RUN iwr https://github.com/fullstorydev/grpcui/releases/download/v1.3.1/grpcui_1
 RUN sudo apt install -y protobuf-compiler protobuf-compiler-grpc libprotobuf-dev
 
 ##########################################
+# postgres
+##########################################
+
+RUN sudo apt install -y postgresql-14 \
+  && psql --version
+
+##########################################
 # scripts
 ##########################################
 
