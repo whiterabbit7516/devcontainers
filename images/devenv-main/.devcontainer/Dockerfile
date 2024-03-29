@@ -14,7 +14,7 @@
 
 # FROM mcr.microsoft.com/devcontainers/universal:2-linux
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
-ARG INVALIDATECACHE="counter-3"
+ARG INVALIDATECACHE="counter-4"
 
 ##########################################
 # users
