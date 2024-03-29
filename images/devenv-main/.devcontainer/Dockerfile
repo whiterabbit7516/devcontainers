@@ -97,7 +97,7 @@ RUN sudo apt-get install -y pkg-config
 # dotnet
 ##########################################
 
-RUN sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-7.0 \
+RUN sudo apt-get install -y dotnet-sdk-8.0 dotnet-sdk-7.0 \
   && dotnet --list-sdks \
   && dotnet --version
 
