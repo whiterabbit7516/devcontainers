@@ -9,7 +9,7 @@
 ##########################################
 
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
-ARG INVALIDATECACHE="counter-4"
+ARG INVALIDATECACHE="counter-5"
 
 ##########################################
 # users
