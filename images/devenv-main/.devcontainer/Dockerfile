@@ -162,7 +162,7 @@ RUN sudo npm install -g @devcontainers/cli \
 # foundry
 ##########################################
 
-RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_nightly_linux_amd64.tar.gz -o foundry.tar.gz \
+RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_nightly_linux_amd64.tar.gz -outfile foundry.tar.gz \
   && mkdir foundry \
   && tar -C ./foundry -xzf foundry.tar.gz \
   && mv ./foundry /usr/local/foundry/ \
