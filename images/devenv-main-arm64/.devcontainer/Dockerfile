@@ -275,6 +275,12 @@ RUN sudo apt install -y postgresql-14 \
 # foundry
 ##########################################
 
+RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_nightly_linux_arm64.tar.gz -outfile foundry.tar.gz \
+  && mkdir foundry \
+  && tar -C ./foundry -xzf foundry.tar.gz \
+  && mv ./foundry /usr/local/foundry/ \
+  && /usr/local/foundry/forge --version
+
 ##########################################
 # scripts
 ##########################################
