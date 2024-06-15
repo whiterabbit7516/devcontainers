@@ -3,7 +3,7 @@
 {
   "name": "devenv-main",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "ghcr.io/ha07z7xe/devcontainers/devenv-main:latest",
+  "image": "ghcr.io/ha07z7xe/devcontainers/devenv-main-amd64:latest",
   "runArgs": [
     "--network=host"
     // "--cap-add=NET_RAW",
@@ -12,7 +12,7 @@
   "initializeCommand": [
     "docker",
     "pull",
-    "ghcr.io/ha07z7xe/devcontainers/devenv-main:latest"
+    "ghcr.io/ha07z7xe/devcontainers/devenv-main-amd64:latest"
   ],
   "customizations": {
     "vscode": {

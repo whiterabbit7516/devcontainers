@@ -9,7 +9,7 @@
 ##########################################
 
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
-ARG INVALIDATECACHE="counter-5"
+ARG INVALIDATECACHE="counter-6"
 
 ##########################################
 # users
@@ -287,7 +287,6 @@ RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_
 ##########################################
 
 WORKDIR /devcontainer/docker-context
-COPY /postCreate.ps1 ./
 
 ##########################################
 # user

@@ -1,11 +1,11 @@
-name: image-devenv-main
+name: image-devenv-main-amd64
 run-name: "[ref:${{ github.ref }}] [user:${{ github.actor }}]"
 on:
   push:
     branches:
       - main
     paths:
-      - images/devenv-main/**
+      - images/devenv-main-amd64/**
 permissions:
   contents: read
   packages: write
@@ -26,7 +26,7 @@ jobs:
       - name: build
         uses: devcontainers/ci@v0.3
         with:
-          cacheFrom: ghcr.io/ha07z7xe/devcontainers/devenv-main
-          imageName: ghcr.io/ha07z7xe/devcontainers/devenv-main
+          cacheFrom: ghcr.io/ha07z7xe/devcontainers/devenv-main-amd64
+          imageName: ghcr.io/ha07z7xe/devcontainers/devenv-main-amd64
           push: always
-          subFolder: images/devenv-main/
+          subFolder: images/devenv-main-amd64/
