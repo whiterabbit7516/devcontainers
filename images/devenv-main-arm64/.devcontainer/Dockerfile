@@ -8,7 +8,7 @@
 # base image
 ##########################################
 
-FROM mcr.microsoft.com/devcontainers/base:ubuntu
+FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:ubuntu
 ARG INVALIDATECACHE="counter-6"
 
 ##########################################
@@ -20,7 +20,6 @@ ARG INVALIDATECACHE="counter-6"
 ##########################################
 # context
 ##########################################
-
 
 WORKDIR /devcontainer/docker-build-workdir
 USER root

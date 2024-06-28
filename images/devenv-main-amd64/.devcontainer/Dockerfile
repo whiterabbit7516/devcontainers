@@ -8,12 +8,7 @@
 # base image
 ##########################################
 
-##########################################
-# base image
-##########################################
-
-# FROM mcr.microsoft.com/devcontainers/universal:2-linux
-FROM mcr.microsoft.com/devcontainers/base:ubuntu
+FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:ubuntu
 ARG INVALIDATECACHE="counter-6"
 
 ##########################################
