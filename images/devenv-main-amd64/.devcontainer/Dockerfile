@@ -9,7 +9,7 @@
 ##########################################
 
 FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:ubuntu
-ARG INVALIDATECACHE="counter-6"
+ARG INVALIDATECACHE="counter-7"
 
 ##########################################
 # users
