@@ -9,7 +9,7 @@
 ##########################################
 
 FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:ubuntu
-ARG INVALIDATECACHE="counter-7"
+ARG INVALIDATECACHE="counter-8"
 
 ##########################################
 # users
@@ -114,6 +114,13 @@ RUN sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-7.0 \
   && dotnet --version
 
 ##########################################
+# java
+##########################################
+
+# RUN sudo apt-get install -y openjdk-8-jdk \
+#   && javac -version
+
+##########################################
 # npm
 ##########################################
 
@@ -184,6 +191,23 @@ RUN sudo apt-get install -y vault \
     && vault version
 
 ##########################################
+# foundry
+##########################################
+
+RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_nightly_linux_arm64.tar.gz -outfile foundry.tar.gz \
+  && mkdir foundry \
+  && tar -C ./foundry -xzf foundry.tar.gz \
+  && mv ./foundry /usr/local/foundry/ \
+  && /usr/local/foundry/forge --version
+
+##########################################
+# docker
+##########################################
+
+RUN sudo apt-get install -y docker.io \
+    && docker --version
+
+##########################################
 # terraform
 ##########################################
 
@@ -198,7 +222,7 @@ RUN sudo apt-get install -y kubectl \
     && kubectl version --client
 
 # k9s
-RUN iwr https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_arm64.tar.gz -outfile k9s.tar.gz \
+RUN iwr https://github.com/derailed/k9s/releases/download/v0.32.5/k9s_Linux_arm64.tar.gz -outfile k9s.tar.gz \
     && tar xzf k9s.tar.gz k9s \
     && mv k9s /usr/local/bin/k9s \
     && k9s version
@@ -270,16 +294,6 @@ RUN sudo apt install -y protobuf-compiler protobuf-compiler-grpc libprotobuf-dev
 
 RUN sudo apt install -y postgresql-14 \
   && psql --version
-
-##########################################
-# foundry
-##########################################
-
-RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_nightly_linux_arm64.tar.gz -outfile foundry.tar.gz \
-  && mkdir foundry \
-  && tar -C ./foundry -xzf foundry.tar.gz \
-  && mv ./foundry /usr/local/foundry/ \
-  && /usr/local/foundry/forge --version
 
 ##########################################
 # scripts
