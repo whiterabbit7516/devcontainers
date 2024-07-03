@@ -8,7 +8,7 @@
     // "ghcr.io/devcontainers/features/powershell:1": {
     //   "modules": "PSFzf"
     // },
-    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
     // "ghcr.io/devcontainers/features/rust:1": {},
     // "ghcr.io/devcontainers/features/dotnet:1": {
     //   "version": "7"
