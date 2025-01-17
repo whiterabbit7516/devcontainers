@@ -253,10 +253,6 @@ RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.9.18/argocd-lin
     && mv ./argocd /usr/local/bin/argocd \
     && argocd version --client
 
-# kurtosis
-RUN sudo apt-get install -y kurtosis-cli \
-    && kurtosis version
-
 ##########################################
 # teleport
 ##########################################
