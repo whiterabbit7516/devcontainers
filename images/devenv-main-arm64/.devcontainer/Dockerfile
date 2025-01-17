@@ -243,8 +243,8 @@ RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4
 RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.28.0/kubeseal-0.28.0-linux-arm.tar.gz -outfile kubeseal.tar.gz \
     && tar xzf kubeseal.tar.gz kubeseal \
     && chmod +x ./kubeseal \
-    && mv kubeseal /usr/local/bin/kubeseal \
-    && kubeseal --version
+    && mv kubeseal /usr/local/bin/kubeseal 
+    # && kubeseal --version # error: .buildkit_qemu_emulator: /usr/local/bin/kubeseal: Invalid ELF image for this architecture
 
 # helm
 RUN iwr https://get.helm.sh/helm-v3.12.0-linux-arm64.tar.gz -outfile helm.tar.gz \
