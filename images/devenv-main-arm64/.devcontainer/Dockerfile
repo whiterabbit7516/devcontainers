@@ -42,9 +42,9 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr
 
 # kubernetes
 RUN apt-get install -y apt-transport-https ca-certificates curl \
-    && curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
+    && curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
     && chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
+    && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
     && apt-get update
 
 # teleport
@@ -222,7 +222,7 @@ RUN sudo apt-get install -y kubectl \
     && kubectl version --client
 
 # k9s
-RUN iwr https://github.com/derailed/k9s/releases/download/v0.32.5/k9s_Linux_arm64.tar.gz -outfile k9s.tar.gz \
+RUN iwr https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_Linux_arm64.tar.gz -outfile k9s.tar.gz \
     && tar xzf k9s.tar.gz k9s \
     && mv k9s /usr/local/bin/k9s \
     && k9s version
@@ -240,11 +240,11 @@ RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4
     && kubens --help
 
 # kubeseal
-RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.21.0/kubeseal-0.21.0-linux-arm.tar.gz -outfile kubeseal.tar.gz \
+RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.28.0/kubeseal-0.28.0-linux-arm.tar.gz -outfile kubeseal.tar.gz \
     && tar xzf kubeseal.tar.gz kubeseal \
     && chmod +x ./kubeseal \
-    && mv kubeseal /usr/local/bin/kubeseal
-    # && kubeseal --version
+    && mv kubeseal /usr/local/bin/kubeseal \
+    && kubeseal --version
 
 # helm
 RUN iwr https://get.helm.sh/helm-v3.12.0-linux-arm64.tar.gz -outfile helm.tar.gz \
@@ -257,6 +257,10 @@ RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.7.2/argocd-linu
     && chmod +x ./argocd \
     && mv ./argocd /usr/local/bin/argocd \
     && argocd version --client
+
+# kurtosis
+RUN sudo apt-get install -y kurtosis-cli \
+    && kurtosis version
 
 ##########################################
 # teleport
