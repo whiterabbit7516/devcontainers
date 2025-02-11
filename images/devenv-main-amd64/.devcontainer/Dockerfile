@@ -2,14 +2,14 @@
 # parameters
 ##########################################
 
-# ARG VARIANT="focal"
-ARG INVALIDATECACHE="counter-09"
+ARG INVALIDATE_CACHE="counter-09"
+ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
 # base image
 ##########################################
 
-FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:ubuntu
+FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT}
 
 ##########################################
 # users
