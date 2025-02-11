@@ -158,9 +158,10 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-arm64.tar.gz -outfile go.tar.gz \
 # python
 ##########################################
 
-RUN sudo apt-get install -y -q python3-pip python3.12
-RUN python3 --version \
-    && pip3 --version
+# todo - fix
+# RUN sudo apt-get install -y -q python3-pip python3.12
+# RUN python3 --version \
+#     && pip3 --version
 
 ##########################################
 # devcontainers
@@ -178,8 +179,6 @@ RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "aw
     && sudo ./aws/install \
     && rm -rf aws* \
     && aws --version
-
-# RUN sudo pwsh -c Install-Module -Scope AllUsers -Name AWSPowerShell.NetCore -Force
 
 ##########################################
 # vault
