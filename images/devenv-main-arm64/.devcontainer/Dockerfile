@@ -29,33 +29,33 @@ USER root
 ##########################################
 
 # microsoft
-RUN sudo apt-get update \
-    && sudo apt-get install -y wget apt-transport-https software-properties-common \
+RUN sudo apt-get update -q \
+    && sudo apt-get install -y -q wget apt-transport-https software-properties-common \
     && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
     && sudo dpkg -i packages-microsoft-prod.deb \
-    && apt-get update
+    && apt-get update -q
 
 # hashicorp
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
     && echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list \
-    && apt-get update
+    && apt-get update -q
 
 # kubernetes
-RUN apt-get install -y apt-transport-https ca-certificates curl \
+RUN apt-get install -y -q apt-transport-https ca-certificates curl \
     && curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
     && chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
-    && apt-get update
+    && apt-get update -q
 
 # teleport
 RUN sudo curl https://apt.releases.teleport.dev/gpg -o /usr/share/keyrings/teleport-archive-keyring.asc \
     && . /etc/os-release \
     && echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v13" \
     | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null \
-    && apt-get update
+    && apt-get update -q
 
 # RUN sudo add-apt-repository universe
-RUN sudo apt-get update 
+RUN sudo apt-get update -q
 
 ##########################################
 # powershell
@@ -74,7 +74,7 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 # core utilities
 ##########################################
 
-RUN sudo apt-get install -y tmux vim ranger fzf file pciutils direnv \
+RUN sudo apt-get install -y -q tmux vim ranger fzf file pciutils direnv \
     && tmux -V \
     && fzf --version
 
@@ -82,9 +82,9 @@ RUN sudo apt-get install -y tmux vim ranger fzf file pciutils direnv \
 # network utilities
 ##########################################
 
-RUN sudo apt install -y iputils-ping dnsutils socat ipcalc
+RUN sudo apt-get install -y -q iputils-ping dnsutils socat ipcalc
 RUN echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
-RUN sudo apt install -y tshark termshark
+RUN sudo apt-get install -y -q tshark termshark
 
 ##########################################
 # linuxbrew
@@ -103,14 +103,14 @@ RUN sudo apt install -y tshark termshark
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN /root/.cargo/bin/cargo version
-RUN sudo apt-get install -y pkg-config
+RUN sudo apt-get install -y -q pkg-config
 
 ##########################################
 # dotnet
 ##########################################
 
-# RUN sudo apt-get install -y dotnet-sdk-9.0 dotnet-sdk-8.0 \
-RUN sudo apt-get install -y dotnet-sdk-8.0 \
+# RUN sudo apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
+RUN sudo apt-get install -y -q dotnet-sdk-8.0 \
   && dotnet --list-sdks \
   && dotnet --version
 
@@ -118,14 +118,14 @@ RUN sudo apt-get install -y dotnet-sdk-8.0 \
 # java
 ##########################################
 
-# RUN sudo apt-get install -y openjdk-8-jdk \
+# RUN sudo apt-get install -y -q openjdk-8-jdk \
 #   && javac -version
 
 ##########################################
 # npm
 ##########################################
 
-RUN sudo apt install -y npm \
+RUN sudo apt-get install -y -q npm \
     && npm version
 
 RUN npm cache clean -f \
@@ -159,7 +159,7 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-arm64.tar.gz -outfile go.tar.gz \
 ##########################################
 
 # todo
-# RUN sudo apt install -y python3-pip python3.10
+# RUN sudo apt-get install -y -q python3-pip python3.10
 # RUN python3 --version \
 #     && pip3 --version
 
@@ -177,7 +177,7 @@ RUN sudo npm install -g @devcontainers/cli \
 ##########################################
 
 RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "awscliv2.zip" \
-    && unzip awscliv2.zip \
+    && unzip -q awscliv2.zip \
     && sudo ./aws/install \
     && rm -rf aws* \
     && aws --version
@@ -188,8 +188,8 @@ RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "aw
 # vault
 ##########################################
 
-RUN sudo apt-get install -y vault \
-    && sudo apt-get install --reinstall -y vault \
+RUN sudo apt-get install -y -q vault \
+    && sudo apt-get install --reinstall -y -q vault \
     && vault version
 
 ##########################################
@@ -206,21 +206,21 @@ RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_
 # docker
 ##########################################
 
-RUN sudo apt-get install -y docker.io \
+RUN sudo apt-get install -y -q docker.io \
     && docker --version
 
 ##########################################
 # terraform
 ##########################################
 
-RUN sudo apt-get install -y terraform \
+RUN sudo apt-get install -y -q terraform \
     && terraform version
 
 ##########################################
 # kubernetes
 ##########################################
 
-RUN sudo apt-get install -y kubectl \
+RUN sudo apt-get install -y -q kubectl \
     && kubectl version --client
 
 # k9s
@@ -264,7 +264,7 @@ RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.7.2/argocd-linu
 # teleport
 ##########################################
 
-RUN sudo apt-get install -y teleport \
+RUN sudo apt-get install -y -q teleport \
     && teleport version \
     && tsh version \
     && tctl version
@@ -288,14 +288,15 @@ RUN iwr https://github.com/fullstorydev/grpcui/releases/download/v1.3.1/grpcui_1
     && grpcui -version
 
 # protobuf libs
-RUN sudo apt install -y protobuf-compiler protobuf-compiler-grpc libprotobuf-dev
+RUN sudo apt-get install -y -q protobuf-compiler protobuf-compiler-grpc libprotobuf-dev
 
 ##########################################
 # postgres
 ##########################################
 
-RUN sudo apt install -y postgresql-14 \
-  && psql --version
+# todo
+# RUN sudo apt-get install -y -q postgresql-14 \
+#   && psql --version
 
 ##########################################
 # scripts
