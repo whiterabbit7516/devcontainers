@@ -158,11 +158,12 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-arm64.tar.gz -outfile go.tar.gz \
 # python
 ##########################################
 
-RUN sudo apt install -y python3-pip python3.10
-RUN python3 --version \
-    && pip3 --version
+# todo
+# RUN sudo apt install -y python3-pip python3.10
+# RUN python3 --version \
+#     && pip3 --version
 
-RUN pip3 install virtualenv black pandas numpy
+# RUN pip3 install virtualenv black pandas numpy
 
 ##########################################
 # devcontainers
