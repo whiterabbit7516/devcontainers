@@ -1,5 +1,8 @@
 name: image-devenv-main-amd64
 run-name: "[ref:${{ github.ref }}] [user:${{ github.actor }}]"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 on:
   push:
     branches:
