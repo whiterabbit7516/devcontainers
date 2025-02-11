@@ -1,6 +1,6 @@
 ## build
-docker build -t ghcr.io/ha07z7xe/devenv-main-amd64 -f Dockerfile --network host .
+docker build -t ghcr.io/whiterabbit7516/devenv-main-amd64 -f Dockerfile --network host .
 
 ## push
 docker push ahoenxk3/dev-main
-docker push ghcr.io/ha07z7xe/dev-main
+docker push ghcr.io/whiterabbit7516/dev-main
