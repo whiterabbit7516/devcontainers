@@ -155,13 +155,9 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-amd64.tar.gz -outfile go.tar.gz \
 # python
 ##########################################
 
-
-# todo
-# RUN sudo apt-get install -y -q python3-pip python3.10
-# RUN python3 --version \
-#   && pip3 --version
-
-# RUN pip3 install virtualenv black pandas numpy
+RUN sudo apt-get install -y -q python3-pip python3.12
+RUN python3 --version \
+  && pip3 --version
 
 ##########################################
 # devcontainers
@@ -290,9 +286,8 @@ RUN sudo apt-get install -y -q protobuf-compiler protobuf-compiler-grpc libproto
 # postgres
 ##########################################
 
-# todo
-# RUN sudo apt-get install -y -q postgresql-14 \
-#   && psql --version
+RUN sudo apt-get install -y -q postgresql-16 \
+  && psql --version
 
 ##########################################
 # scripts
