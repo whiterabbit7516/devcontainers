@@ -3,13 +3,13 @@
 ##########################################
 
 # ARG VARIANT="focal"
+ARG INVALIDATECACHE="counter-09"
 
 ##########################################
 # base image
 ##########################################
 
 FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:ubuntu
-ARG INVALIDATECACHE="counter-8"
 
 ##########################################
 # users
