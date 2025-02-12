@@ -242,7 +242,7 @@ RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.28.0
     && kubeseal --version
 
 # helm
-RUN iwr https://get.helm.sh/helm-v3.12.0-linux-amd64.tar.gz -outfile helm.tar.gz \
+RUN iwr https://get.helm.sh/helm-v3.17.0-linux-amd64.tar.gz -outfile helm.tar.gz \
     && tar xzf helm.tar.gz linux-amd64/helm \
     && mv linux-amd64/helm /usr/local/bin/helm \
     && helm version
