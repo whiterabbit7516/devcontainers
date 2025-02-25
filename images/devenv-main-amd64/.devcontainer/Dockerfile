@@ -186,16 +186,6 @@ RUN sudo apt-get install -y -q vault \
     && vault version
 
 ##########################################
-# foundry
-##########################################
-
-RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_nightly_linux_amd64.tar.gz -outfile foundry.tar.gz \
-  && mkdir foundry \
-  && tar -C ./foundry -xzf foundry.tar.gz \
-  && mv ./foundry /usr/local/foundry/ \
-  && /usr/local/foundry/forge --version
-
-##########################################
 # docker
 ##########################################
 
@@ -289,6 +279,31 @@ RUN sudo apt-get install -y -q protobuf-compiler protobuf-compiler-grpc libproto
 
 RUN sudo apt-get install -y -q postgresql-16 \
   && psql --version
+
+##########################################
+# foundry
+##########################################
+
+RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_nightly_linux_amd64.tar.gz -outfile foundry.tar.gz \
+  && mkdir foundry \
+  && tar -C ./foundry -xzf foundry.tar.gz \
+  && mv ./foundry /usr/local/foundry/ \
+  && /usr/local/foundry/forge --version
+
+##########################################
+# aztec/noir
+##########################################
+
+# nargo
+RUN curl -fsSL https://raw.githubusercontent.com/noir-lang/noirup/refs/heads/main/install | bash \
+    && /root/.nargo/bin/noirup \
+    && /root/.nargo/bin/nargo --version
+
+# bb
+RUN apt-get install -y -q libc++-dev \
+    && curl -fsSL https://raw.githubusercontent.com/AztecProtocol/aztec-packages/refs/heads/master/barretenberg/bbup/install | bash \
+    && /root/.bb/bbup --noir-version 1.0.0-beta.2 \
+    && /root/.bb/bb --version
 
 ##########################################
 # scripts
