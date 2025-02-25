@@ -302,11 +302,11 @@ RUN curl -fsSL https://raw.githubusercontent.com/noir-lang/noirup/refs/heads/mai
     && /root/.nargo/bin/noirup \
     && /root/.nargo/bin/nargo --version
 
-# bb
-RUN apt-get install -y -q libc++-dev \
-    && curl -fsSL https://raw.githubusercontent.com/AztecProtocol/aztec-packages/refs/heads/master/barretenberg/bbup/install | bash \
-    && /root/.bb/bbup --noir-version 1.0.0-beta.2 \
-    && /root/.bb/bb --version
+# # bb
+# RUN apt-get install -y -q libc++-dev \
+#     && curl -fsSL https://raw.githubusercontent.com/AztecProtocol/aztec-packages/refs/heads/master/barretenberg/bbup/install | bash \
+#     && /root/.bb/bbup --noir-version 1.0.0-beta.2 \
+#     && /root/.bb/bb --version
 
 ##########################################
 # scripts
