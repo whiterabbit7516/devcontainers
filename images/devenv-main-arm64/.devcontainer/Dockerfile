@@ -163,11 +163,14 @@ RUN python3 --version \
       && pip3 --version
 
 ##########################################
-# devcontainers
+# vscode
 ##########################################
 
 RUN sudo npm install -g @devcontainers/cli \
     && devcontainer --version
+
+RUN sudo npm install -g generator-code \
+    && yo --generators
 
 ##########################################
 # aws
