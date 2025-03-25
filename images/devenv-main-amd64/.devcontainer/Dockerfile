@@ -130,11 +130,10 @@ RUN npm cache clean -f \
   && npm install -g n \
   && n stable
 
-RUN npm install --global yarn \
-  && yarn --version
-
-RUN npm install -g pnpm \
-    && pnpm --version
+RUN npm install --global yarn pnpm yo \
+  && yarn --version \
+  && pnpm --version \
+  && yo --version
 
 ##########################################
 # typescript
