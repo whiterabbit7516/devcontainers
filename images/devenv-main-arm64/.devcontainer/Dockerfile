@@ -172,22 +172,25 @@ RUN sudo npm install -g generator-code \
     && yo --generators
 
 ##########################################
-# aws
+# hashicorp
 ##########################################
 
-RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "awscliv2.zip" \
-    && unzip -q awscliv2.zip \
-    && sudo ./aws/install \
-    && rm -rf aws* \
-    && aws --version
+# terraform
+RUN sudo apt-get install -y -q terraform \
+    && terraform version
 
-##########################################
 # vault
-##########################################
-
 RUN sudo apt-get install -y -q vault \
     && sudo apt-get install --reinstall -y -q vault \
     && vault version
+
+# nomad
+RUN sudo apt-get install -y -q nomad \
+    && nomad version
+
+# consul
+RUN sudo apt-get install -y -q nomad \
+    && nomad version
 
 ##########################################
 # docker
@@ -197,11 +200,14 @@ RUN sudo apt-get install -y -q docker.io \
     && docker --version
 
 ##########################################
-# terraform
+# aws
 ##########################################
 
-RUN sudo apt-get install -y -q terraform \
-    && terraform version
+RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "awscliv2.zip" \
+    && unzip -q awscliv2.zip \
+    && sudo ./aws/install \
+    && rm -rf aws* \
+    && aws --version
 
 ##########################################
 # kubernetes
