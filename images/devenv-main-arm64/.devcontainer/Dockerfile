@@ -60,7 +60,7 @@ RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg
   && curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 
 # RUN sudo add-apt-repository universe
-COPY etc.apt.preferences /etc/apt/preferences
+# COPY etc.apt.preferences /etc/apt/preferences
 RUN sudo apt-get update -q
 
 ##########################################
