@@ -28,33 +28,39 @@ USER root
 # repository setup
 ##########################################
 
-# microsoft
+# apt tools
 RUN sudo apt-get update -q \
-    && sudo apt-get install -y -q wget apt-transport-https software-properties-common \
-    && wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
-    && sudo dpkg -i packages-microsoft-prod.deb \
-    && apt-get update -q
+  && sudo apt-get install -y -q wget apt-transport-https software-properties-common
+
+# microsoft
+RUN wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
+  && sudo dpkg -i packages-microsoft-prod.deb 
 
 # hashicorp
 RUN wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
-  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list \
-  && sudo apt update -q
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
 # kubernetes
 RUN apt-get install -y -q apt-transport-https ca-certificates curl \
     && curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
     && chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
-    && apt-get update -q
+    && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 # teleport
 RUN sudo curl https://apt.releases.teleport.dev/gpg -o /usr/share/keyrings/teleport-archive-keyring.asc \
     && . /etc/os-release \
-    && echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v16" \
-    | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null \
-    && apt-get update -q
+    && echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v16" | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null
+
+# 1password
+RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg \
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list \
+  && sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/ \
+  && curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol \
+  && sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 \
+  && curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 
 # RUN sudo add-apt-repository universe
+COPY etc.apt.preferences /etc/apt/preferences
 RUN sudo apt-get update -q
 
 ##########################################
@@ -170,6 +176,13 @@ RUN sudo npm install -g @devcontainers/cli \
 
 RUN sudo npm install -g generator-code \
     && yo --generators
+
+##########################################
+# 1password
+##########################################
+
+RUN sudo apt install -y 1password-cli \
+    && op --version
 
 ##########################################
 # hashicorp
