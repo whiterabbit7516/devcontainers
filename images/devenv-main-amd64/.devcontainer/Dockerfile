@@ -35,6 +35,8 @@ RUN sudo apt-get update -q \
 # microsoft
 RUN wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
   && sudo dpkg -i packages-microsoft-prod.deb 
+# temporary until base:ubuntu-24.10 is available
+RUN sudo add-apt-repository -y ppa:dotnet/backports
 
 # hashicorp
 RUN wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
@@ -113,8 +115,7 @@ RUN sudo apt-get install -y -q pkg-config
 # dotnet
 ##########################################
 
-# RUN sudo apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
-RUN sudo apt-get install -y -q dotnet-sdk-8.0 \
+RUN sudo apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
   && dotnet --list-sdks \
   && dotnet --version
 
