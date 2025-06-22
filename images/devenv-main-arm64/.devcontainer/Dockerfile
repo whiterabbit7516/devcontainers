@@ -313,21 +313,10 @@ RUN curl -fsSL https://raw.githubusercontent.com/noir-lang/noirup/refs/heads/mai
 #     && /root/.bb/bb --version
 
 ##########################################
-# scripts
-##########################################
-
-WORKDIR /devcontainer/docker-context
-
-##########################################
-# user
+# finalization
 ##########################################
 
 USER root
-
-##########################################
-# entrypoint 
-##########################################
-
 ENTRYPOINT [ "/bin/pwsh", "-nop", "-nol", "-c"]
 CMD [ "while ($true) {start-sleep 30}" ]
 WORKDIR /
