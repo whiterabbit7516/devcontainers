@@ -12,16 +12,10 @@ ARG IMAGE_VARIANT="ubuntu-24.04"
 FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT}
 
 ##########################################
-# users
-##########################################
-
-# RUN groupadd -r containergroup && useradd -r -g containergroup --create-home containeruser
-
-##########################################
 # context
 ##########################################
 
-WORKDIR /devcontainer/docker-build-workdir
+WORKDIR /devcontainer/build/
 USER root
 
 ##########################################
@@ -91,17 +85,6 @@ RUN sudo apt-get install -y -q tmux vim ranger fzf file pciutils direnv \
 RUN sudo apt-get install -y -q iputils-ping dnsutils socat ipcalc
 RUN echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
 RUN sudo apt-get install -y -q wireshark tshark termshark
-
-##########################################
-# linuxbrew
-##########################################
-
-# RUN git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew \
-#     && mkdir ~/.linuxbrew/bin \
-#     && ln -s ~/.linuxbrew/Homebrew/bin/brew ~/.linuxbrew/bin \
-#     && ln -s ~/.linuxbrew/Homebrew/bin/brew /usr/local/bin/ \
-#     && /bin/bash -c eval $(~/.linuxbrew/bin/brew shellenv) \
-#     && brew update
 
 ##########################################
 # rust

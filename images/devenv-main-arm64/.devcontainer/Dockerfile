@@ -12,16 +12,10 @@ ARG IMAGE_VARIANT="ubuntu-24.04"
 FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT}
 
 ##########################################
-# users
-##########################################
-
-# RUN groupadd -r containergroup && useradd -r -g containergroup --create-home containeruser
-
-##########################################
 # context
 ##########################################
 
-WORKDIR /devcontainer/docker-build-workdir
+WORKDIR /devcontainer/build/
 USER root
 
 ##########################################
@@ -35,6 +29,8 @@ RUN sudo apt-get update -q \
 # microsoft
 RUN wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
   && sudo dpkg -i packages-microsoft-prod.deb 
+# temporary until base:ubuntu-24.10 is available
+RUN sudo add-apt-repository -y ppa:dotnet/backports
 
 # hashicorp
 RUN wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
@@ -93,17 +89,6 @@ RUN echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo 
 RUN sudo apt-get install -y -q tshark termshark
 
 ##########################################
-# linuxbrew
-##########################################
-
-# RUN git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew \
-#     && mkdir ~/.linuxbrew/bin \
-#     && ln -s ~/.linuxbrew/Homebrew/bin/brew ~/.linuxbrew/bin \
-#     && ln -s ~/.linuxbrew/Homebrew/bin/brew /usr/local/bin/ \
-#     && /bin/bash -c eval $(~/.linuxbrew/bin/brew shellenv) \
-#     && brew update
-
-##########################################
 # rust
 ##########################################
 
@@ -115,8 +100,7 @@ RUN sudo apt-get install -y -q pkg-config
 # dotnet
 ##########################################
 
-# RUN sudo apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
-RUN sudo apt-get install -y -q dotnet-sdk-8.0 \
+RUN sudo apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
   && dotnet --list-sdks \
   && dotnet --version
 
