@@ -16,7 +16,7 @@
         "ghcr.io/whiterabbit7516/devcontainers/devenv-main-amd64:latest"
     ],
     "remoteUser": "root",
-    //   "postCreateCommand": "/usr/bin/pwsh -nop -nol -f /devcontainer/docker-context/scripts/postCreate.ps1",
+    //   "postCreateCommand": "/usr/bin/pwsh -nop -nol -f /devcontainer/build/scripts/postCreate.ps1",
     "customizations": {
         "vscode": {
             "settings": {
