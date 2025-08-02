@@ -91,8 +91,10 @@ RUN sudo apt-get install -y -q wireshark tshark termshark
 ##########################################
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
-RUN /root/.cargo/bin/cargo version
-RUN sudo apt-get install -y -q pkg-config
+RUN /root/.cargo/bin/cargo version \
+  && ln -s /root/.cargo/bin/cargo /usr/local/bin/cargo \
+  && cargo version
+RUN sudo apt-get install -y pkg-config
 
 ##########################################
 # dotnet
