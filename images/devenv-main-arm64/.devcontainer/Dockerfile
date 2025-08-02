@@ -2,7 +2,7 @@
 # parameters
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-10"
+ARG INVALIDATE_CACHE="counter-11"
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
@@ -286,16 +286,6 @@ RUN sudo apt-get install -y -q protobuf-compiler protobuf-compiler-grpc libproto
 
 RUN sudo apt-get install -y -q postgresql-16 \
   && psql --version
-
-##########################################
-# foundry
-##########################################
-
-RUN iwr https://github.com/foundry-rs/foundry/releases/download/nightly/foundry_nightly_linux_arm64.tar.gz -outfile foundry.tar.gz \
-  && mkdir foundry \
-  && tar -C ./foundry -xzf foundry.tar.gz \
-  && mv ./foundry /usr/local/foundry/ \
-  && /usr/local/foundry/forge --version
 
 ##########################################
 # aztec/noir
