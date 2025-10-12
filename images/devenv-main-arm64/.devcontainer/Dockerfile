@@ -80,6 +80,13 @@ RUN sudo apt-get install -y -q tmux vim ranger fzf file pciutils direnv \
     && tmux -V \
     && fzf --version
 
+# yq 
+RUN iwr https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_arm64.tar.gz -outfile yq.tar.gz \
+  && tar xzf yq.tar.gz \
+  && chmod +x ./yq_linux_arm64 \
+  && mv ./yq_linux_arm64 /usr/local/bin/yq \
+  && /usr/local/bin/yq --version
+
 ##########################################
 # network utilities
 ##########################################
