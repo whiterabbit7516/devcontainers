@@ -15,6 +15,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # context
 ##########################################
 
+ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 WORKDIR /devcontainer/build/
 USER root
 

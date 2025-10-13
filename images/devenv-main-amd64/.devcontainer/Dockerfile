@@ -3,7 +3,6 @@
 ##########################################
 
 ARG INVALIDATE_CACHE="counter-14"
-ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
@@ -16,6 +15,7 @@ FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # context
 ##########################################
 
+ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 WORKDIR /devcontainer/build/
 USER root
 
