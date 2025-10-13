@@ -3,6 +3,7 @@
 ##########################################
 
 ARG INVALIDATE_CACHE="counter-14"
+ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
