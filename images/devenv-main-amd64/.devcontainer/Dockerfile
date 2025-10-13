@@ -299,16 +299,16 @@ RUN sudo apt-get install -y -q postgresql-16 \
 # aztec/noir
 ##########################################
 
-# nargo
-RUN curl -fsSL https://raw.githubusercontent.com/noir-lang/noirup/refs/heads/main/install | bash \
-    && /root/.nargo/bin/noirup \
-    && /root/.nargo/bin/nargo --version
+# # nargo
+# RUN curl -fsSL https://raw.githubusercontent.com/noir-lang/noirup/refs/heads/main/install | bash \
+#     && /root/.nargo/bin/noirup \
+#     && /root/.nargo/bin/nargo --version
 
-# bb
-RUN apt-get install -y -q libc++-dev \
-    && curl -fsSL https://raw.githubusercontent.com/AztecProtocol/aztec-packages/refs/heads/master/barretenberg/bbup/install | bash \
-    && /root/.bb/bbup --noir-version 1.0.0-beta.2 \
-    && /root/.bb/bb --version
+# # bb
+# RUN apt-get install -y -q libc++-dev \
+#     && curl -fsSL https://raw.githubusercontent.com/AztecProtocol/aztec-packages/refs/heads/master/barretenberg/bbup/install | bash \
+#     && /root/.bb/bbup --noir-version 1.0.0-beta.2 \
+#     && /root/.bb/bb --version
 
 ##########################################
 # finalization

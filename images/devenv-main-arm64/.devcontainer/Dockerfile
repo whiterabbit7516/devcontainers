@@ -302,9 +302,9 @@ RUN sudo apt-get install -y -q postgresql-16 \
 ##########################################
 
 # nargo
-RUN curl -fsSL https://raw.githubusercontent.com/noir-lang/noirup/refs/heads/main/install | bash \
-    && /root/.nargo/bin/noirup \
-    && /root/.nargo/bin/nargo --version
+# RUN curl -fsSL https://raw.githubusercontent.com/noir-lang/noirup/refs/heads/main/install | bash \
+#     && /root/.nargo/bin/noirup \
+#     && /root/.nargo/bin/nargo --version
 
 # # bb
 # RUN apt-get install -y -q libc++-dev \
