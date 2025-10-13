@@ -2,7 +2,7 @@
 # parameters
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-11"
+ARG INVALIDATE_CACHE="counter-12"
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
