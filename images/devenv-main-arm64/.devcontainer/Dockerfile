@@ -122,7 +122,7 @@ RUN sudo apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
 #   && javac -version
 
 ##########################################
-# npm
+# npm / typescript
 ##########################################
 
 RUN sudo apt-get install -y -q npm \
@@ -137,11 +137,11 @@ RUN npm install --global yarn pnpm yo \
   && pnpm --version \
   && yo --version
 
-##########################################
-# typescript
-##########################################
+RUN npm install --global @nestjs/cli prettier \
+  && nest --version \
+  && prettier --version
 
-RUN sudo npm install -g typescript ts-node \
+RUN npm install --global typescript ts-node \
   && tsc --version \
   && ts-node --version
 
