@@ -24,14 +24,14 @@ USER root
 ##########################################
 
 # apt tools
-RUN sudo apt-get update -q \
+RUN apt-get update -q \
   && sudo apt-get install -y -q wget apt-transport-https software-properties-common
 
 # microsoft
 RUN wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
   && sudo dpkg -i packages-microsoft-prod.deb 
 # temporary until base:ubuntu-24.10 is available
-RUN sudo add-apt-repository -y ppa:dotnet/backports
+RUN add-apt-repository -y ppa:dotnet/backports
 
 # hashicorp
 RUN wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
@@ -44,7 +44,7 @@ RUN apt-get install -y -q apt-transport-https ca-certificates curl \
     && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 # teleport
-RUN sudo curl https://apt.releases.teleport.dev/gpg -o /usr/share/keyrings/teleport-archive-keyring.asc \
+RUN curl https://apt.releases.teleport.dev/gpg -o /usr/share/keyrings/teleport-archive-keyring.asc \
     && . /etc/os-release \
     && echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v16" | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null
 
@@ -56,9 +56,9 @@ RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg
   && sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 \
   && curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 
-# RUN sudo add-apt-repository universe
+# RUN add-apt-repository universe
 # COPY etc.apt.preferences /etc/apt/preferences
-RUN sudo apt-get update -q
+RUN apt-get update -q
 
 ##########################################
 # powershell
@@ -77,7 +77,7 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 # core utilities
 ##########################################
 
-RUN sudo apt-get install -y -q tmux vim ranger fzf file pciutils direnv \
+RUN apt-get install -y -q tmux vim ranger fzf file pciutils direnv \
     && tmux -V \
     && fzf --version
 
@@ -92,9 +92,9 @@ RUN iwr https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_arm64
 # network utilities
 ##########################################
 
-RUN sudo apt-get install -y -q iputils-ping dnsutils socat ipcalc
+RUN apt-get install -y -q iputils-ping dnsutils socat ipcalc
 RUN echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
-RUN sudo apt-get install -y -q tshark termshark
+RUN apt-get install -y -q tshark termshark
 
 ##########################################
 # rust
@@ -104,13 +104,13 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN /root/.cargo/bin/cargo version \
   && ln -s /root/.cargo/bin/cargo /usr/local/bin/cargo \
   && cargo version
-RUN sudo apt-get install -y pkg-config
+RUN apt-get install -y pkg-config
 
 ##########################################
 # dotnet
 ##########################################
 
-RUN sudo apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
+RUN apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
   && dotnet --list-sdks \
   && dotnet --version
 
@@ -118,14 +118,14 @@ RUN sudo apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
 # java
 ##########################################
 
-# RUN sudo apt-get install -y -q openjdk-8-jdk \
+# RUN apt-get install -y -q openjdk-8-jdk \
 #   && javac -version
 
 ##########################################
 # npm / typescript
 ##########################################
 
-RUN sudo apt-get install -y -q npm \
+RUN apt-get install -y -q npm \
     && npm version
 
 RUN npm cache clean -f \
@@ -157,7 +157,7 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-arm64.tar.gz -outfile go.tar.gz \
 # python
 ##########################################
 
-RUN sudo apt-get install -y -q python3 python3-pip
+RUN apt-get install -y -q python3 python3-pip
 RUN python3 --version \
       && pip3 --version
 
@@ -165,17 +165,17 @@ RUN python3 --version \
 # vscode
 ##########################################
 
-RUN sudo npm install -g @devcontainers/cli \
+RUN npm install -g @devcontainers/cli \
     && devcontainer --version
 
-RUN sudo npm install -g generator-code \
+RUN npm install -g generator-code \
     && yo --generators
 
 ##########################################
 # 1password
 ##########################################
 
-RUN sudo apt install -y 1password-cli \
+RUN apt install -y 1password-cli \
     && op --version
 
 ##########################################
@@ -183,27 +183,27 @@ RUN sudo apt install -y 1password-cli \
 ##########################################
 
 # terraform
-RUN sudo apt-get install -y -q terraform \
+RUN apt-get install -y -q terraform \
     && terraform version
 
 # vault
-RUN sudo apt-get install -y -q vault \
+RUN apt-get install -y -q vault \
     && sudo apt-get install --reinstall -y -q vault \
     && vault version
 
 # nomad
-RUN sudo apt-get install -y -q nomad \
+RUN apt-get install -y -q nomad \
     && nomad version
 
 # consul
-RUN sudo apt-get install -y -q nomad \
+RUN apt-get install -y -q nomad \
     && nomad version
 
 ##########################################
 # docker
 ##########################################
 
-RUN sudo apt-get install -y -q docker.io docker-compose \
+RUN apt-get install -y -q docker.io docker-compose \
     && docker --version \
     && docker-compose --version
 
@@ -221,7 +221,7 @@ RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "aw
 # kubernetes
 ##########################################
 
-RUN sudo apt-get install -y -q kubectl \
+RUN apt-get install -y -q kubectl \
     && kubectl version --client
 
 # k9s
@@ -265,7 +265,7 @@ RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.7.2/argocd-linu
 # teleport
 ##########################################
 
-RUN sudo apt-get install -y -q teleport \
+RUN apt-get install -y -q teleport \
     && teleport version \
     && tsh version \
     && tctl version
@@ -289,13 +289,13 @@ RUN iwr https://github.com/fullstorydev/grpcui/releases/download/v1.3.1/grpcui_1
     && grpcui -version
 
 # protobuf libs
-RUN sudo apt-get install -y -q protobuf-compiler protobuf-compiler-grpc libprotobuf-dev
+RUN apt-get install -y -q protobuf-compiler protobuf-compiler-grpc libprotobuf-dev
 
 ##########################################
 # postgres
 ##########################################
 
-RUN sudo apt-get install -y -q postgresql-16 \
+RUN apt-get install -y -q postgresql-16 \
   && psql --version
 
 ##########################################

@@ -126,7 +126,7 @@ RUN apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
 RUN apt-get install -y -q npm \
     && npm version
 
-RUN cache clean -f \
+RUN npm cache clean -f \
     && npm install -g n \
     && n stable
 
