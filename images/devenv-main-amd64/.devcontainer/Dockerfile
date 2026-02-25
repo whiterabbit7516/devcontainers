@@ -155,9 +155,9 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-amd64.tar.gz -outfile go.tar.gz \
 # python
 ##########################################
 
-RUN apt-get update &&  install -y -q python3 python3-pip
+RUN apt-get update && apt-get install -y -q python3 python3-pip
 RUN python3 --version \
-  && pip3 --version
+    && pip3 --version
 
 ##########################################
 # vscode
