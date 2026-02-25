@@ -157,8 +157,7 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-arm64.tar.gz -outfile go.tar.gz \
 # python
 ##########################################
 
-RUN sudo apt-get
-RUN sudo apt-get install -y -q python3.12 python3-pip
+RUN sudo apt-get install -y -q python3 python3-pip
 RUN python3 --version \
       && pip3 --version
 
