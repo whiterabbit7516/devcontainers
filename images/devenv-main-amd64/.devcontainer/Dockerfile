@@ -2,7 +2,7 @@
 # parameters
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-16"
+ARG INVALIDATE_CACHE="counter-17"
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
@@ -155,9 +155,6 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-amd64.tar.gz -outfile go.tar.gz \
 # python
 ##########################################
 
-# for testing
-RUN sudo apt-get update
-
 RUN sudo apt-get install -y -q python3.12 python3-pip
 RUN python3 --version \
   && pip3 --version
@@ -204,8 +201,9 @@ RUN sudo apt-get install -y -q nomad \
 # docker
 ##########################################
 
-RUN sudo apt-get install -y -q docker.io \
-    && docker --version
+RUN sudo apt-get install -y -q docker.io docker-compose \
+    && docker --version \
+    && docker-compose --version
 
 ##########################################
 # aws
