@@ -2,7 +2,7 @@
 # parameters
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-14"
+ARG INVALIDATE_CACHE="counter-15"
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
@@ -110,7 +110,7 @@ RUN apt-get install -y pkg-config
 # dotnet
 ##########################################
 
-RUN apt-get install -y -q dotnet-sdk-9.0 dotnet-sdk-8.0 \
+RUN apt-get install -y -q dotnet-sdk-10.0 dotnet-sdk-9.0 \
   && dotnet --list-sdks \
   && dotnet --version
 
