@@ -8,6 +8,7 @@ on:
     branches:
       - main
     paths:
+      - .github/workflows/image-devenv-main-amd64.yaml
       - images/devenv-main-amd64/**
 permissions:
   contents: read
