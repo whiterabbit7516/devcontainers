@@ -2,7 +2,6 @@
 # parameters
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-19"
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
@@ -12,12 +11,16 @@ ARG IMAGE_VARIANT="ubuntu-24.04"
 FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT}
 
 ##########################################
+# cache invalidation
+##########################################
+
+ARG INVALIDATE_CACHE="counter-22"
+ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
+
+##########################################
 # context
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-20"
-ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
-RUN echo "cache buster: ${INVALIDATE_CACHE}"
 WORKDIR /devcontainer/build/
 USER root
 

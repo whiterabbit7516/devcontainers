@@ -2,7 +2,6 @@
 # parameters
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-22"
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
@@ -12,10 +11,16 @@ ARG IMAGE_VARIANT="ubuntu-24.04"
 FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT}
 
 ##########################################
+# cache invalidation
+##########################################
+
+ARG INVALIDATE_CACHE="counter-22"
+ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
+
+##########################################
 # context
 ##########################################
 
-ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 WORKDIR /devcontainer/build/
 USER root
 
