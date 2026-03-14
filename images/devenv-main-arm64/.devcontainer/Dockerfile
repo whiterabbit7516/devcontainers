@@ -2,7 +2,7 @@
 # parameters
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-16"
+ARG INVALIDATE_CACHE="counter-17"
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
@@ -58,8 +58,7 @@ RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg
 
 # RUN add-apt-repository universe
 # COPY etc.apt.preferences /etc/apt/preferences
-RUN INVALIDATE_CACHE=${INVALIDATE_CACHE} \
-  && apt-get update -q;
+RUN apt-get update -q;
 
 ##########################################
 # powershell
