@@ -2,7 +2,7 @@
 # parameters
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-21"
+ARG INVALIDATE_CACHE="counter-22"
 ARG IMAGE_VARIANT="ubuntu-24.04"
 
 ##########################################
@@ -130,18 +130,22 @@ RUN npm cache clean -f \
     && npm install -g n \
     && n stable
 
-RUN npm install --global yarn pnpm yo \
-  && yarn --version \
+# typescript
+RUN npm install --global typescript ts-node \
+    && tsc --version \
+    && ts-node --version
+
+# package managers
+RUN npm install --global pnpm yarn yo \
   && pnpm --version \
+  && yarn --version \
   && yo --version
 
-RUN npm install --global @nestjs/cli prettier \
+# ecosystem tools
+RUN npm install --global @nestjs/cli prettier turbo \
   && nest --version \
-  && prettier --version
-
-RUN npm install --global typescript ts-node \
-  && tsc --version \
-  && ts-node --version
+  && prettier --version \
+  && turbo --version
 
 ##########################################
 # go
@@ -223,7 +227,7 @@ RUN apt-get install -y -q kubectl \
     && kubectl version --client
 
 # k9s
-RUN iwr https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_Linux_amd64.tar.gz -outfile k9s.tar.gz \
+RUN iwr https://github.com/derailed/k9s/releases/download/v0.50.18/k9s_Linux_amd64.tar.gz -outfile k9s.tar.gz \
     && tar xzf k9s.tar.gz k9s \
     && mv k9s /usr/local/bin/k9s \
     && k9s version
