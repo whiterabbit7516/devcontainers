@@ -16,6 +16,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 ##########################################
 
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
+RUN echo "cache buster: ${INVALIDATE_CACHE}"
 WORKDIR /devcontainer/build/
 USER root
 
