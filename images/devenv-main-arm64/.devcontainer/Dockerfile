@@ -58,7 +58,8 @@ RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg
 
 # RUN add-apt-repository universe
 # COPY etc.apt.preferences /etc/apt/preferences
-RUN apt-get update -q
+RUN INVALIDATE_CACHE=${INVALIDATE_CACHE} \
+  && apt-get update -q;
 
 ##########################################
 # powershell
