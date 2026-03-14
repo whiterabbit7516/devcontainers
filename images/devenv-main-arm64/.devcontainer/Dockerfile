@@ -110,7 +110,7 @@ RUN apt-get install -y pkg-config
 # dotnet
 ##########################################
 
-RUN apt-get update && apt-get install -y -q dotnet-sdk-10.0 \
+RUN apt-get install -y -q dotnet-sdk-10.0 \
   && dotnet --list-sdks \
   && dotnet --version
 
