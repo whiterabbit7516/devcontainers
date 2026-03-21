@@ -194,7 +194,7 @@ RUN apt-get install -y -q terraform \
     && terraform version;
 
 # terragrunt
-RUN iwr https://github.com/gruntwork-io/terragrunt/releases/download/v0.99.4/terragrunt_linux_amd64.tar.gz -outfile terragrunt.tar.gz; \
+RUN iwr https://github.com/gruntwork-io/terragrunt/releases/download/v0.99.4/terragrunt_linux_amd64.tar.gz -outfile terragrunt.tar.gz \
     && tar xzf terragrunt.tar.gz \
     && chmod +x ./terragrunt_linux_amd64 \
     && mv ./terragrunt_linux_amd64 /usr/local/bin/terragrunt \
