@@ -14,7 +14,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-23"
+ARG INVALIDATE_CACHE="counter-24"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
