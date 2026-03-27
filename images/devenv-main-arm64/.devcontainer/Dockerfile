@@ -151,10 +151,11 @@ RUN npm install --global pnpm yarn yo \
   && yo --version
 
 # ecosystem tools
-RUN npm install --global @nestjs/cli prettier turbo \
+RUN npm install --global @nestjs/cli prettier turbo oclif \
   && nest --version \
   && prettier --version \
-  && turbo --version
+  && turbo --version \
+  && oclif --version;
 
 ##########################################
 # go
@@ -194,7 +195,14 @@ RUN apt install -y 1password-cli \
 ##########################################
 
 RUN curl -fsSL https://claude.ai/install.sh | bash \
-    && /root/.local/bin/claude --version
+    && /root/.local/bin/claude --version;
+
+##########################################
+# codex
+##########################################
+
+RUN npm install -g @openai/codex \
+    && codex --version;
 
 ##########################################
 # hashicorp
@@ -214,15 +222,15 @@ RUN iwr https://github.com/gruntwork-io/terragrunt/releases/download/v0.99.4/ter
 # vault
 RUN apt-get install -y -q vault \
     && sudo apt-get install --reinstall -y -q vault \
-    && vault version
+    && vault version;
 
 # nomad
 RUN apt-get install -y -q nomad \
-    && nomad version
+    && nomad version;
 
 # consul
-RUN apt-get install -y -q nomad \
-    && nomad version
+RUN apt-get install -y -q consul \
+    && consul version;
 
 ##########################################
 # docker
