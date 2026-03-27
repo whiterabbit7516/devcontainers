@@ -86,14 +86,14 @@ RUN apt-get install -y -q tmux vim ranger fzf file pciutils direnv ripgrep jq \
     && tmux -V \
     && fzf --version \
     && rg --version \
-    && jq --version
+    && jq --version;
 
 # yq 
 RUN iwr https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_arm64.tar.gz -outfile yq.tar.gz \
   && tar xzf yq.tar.gz \
   && chmod +x ./yq_linux_arm64 \
   && mv ./yq_linux_arm64 /usr/local/bin/yq \
-  && /usr/local/bin/yq --version
+  && /usr/local/bin/yq --version;
 
 ##########################################
 # network utilities
@@ -188,7 +188,7 @@ RUN npm install -g generator-code \
 ##########################################
 
 RUN apt install -y 1password-cli \
-    && op --version
+    && op --version;
 
 ##########################################
 # github

@@ -14,7 +14,7 @@ FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-23"
+ARG INVALIDATE_CACHE="counter-24"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -80,16 +80,18 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 # core utilities
 ##########################################
 
-RUN apt-get install -y -q tmux vim ranger fzf file pciutils direnv \
-  && tmux -V \
-  && fzf --version
+RUN apt-get install -y -q tmux vim ranger fzf file pciutils direnv ripgrep jq \
+    && tmux -V \
+    && fzf --version \
+    && rg --version \
+    && jq --version;
 
 # yq 
 RUN iwr https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_amd64.tar.gz -outfile yq.tar.gz \
   && tar xzf yq.tar.gz \
   && chmod +x ./yq_linux_amd64 \
   && mv ./yq_linux_amd64 /usr/local/bin/yq \
-  && /usr/local/bin/yq --version
+  && /usr/local/bin/yq --version;
 
 ##########################################
 # network utilities
@@ -147,10 +149,11 @@ RUN npm install --global pnpm yarn yo \
   && yo --version
 
 # ecosystem tools
-RUN npm install --global @nestjs/cli prettier turbo \
+RUN npm install --global @nestjs/cli prettier turbo oclif \
   && nest --version \
   && prettier --version \
-  && turbo --version
+  && turbo --version \
+  && oclif --version;
 
 ##########################################
 # go
@@ -183,7 +186,36 @@ RUN npm install -g generator-code \
 ##########################################
 
 RUN apt install -y 1password-cli \
-    && op --version
+    && op --version;
+
+##########################################
+# github
+##########################################
+
+RUN gh --version;
+
+##########################################
+# gitlab
+##########################################
+
+RUN iwr https://gitlab.com/gitlab-org/cli/-/releases/v1.90.0/downloads/glab_1.90.0_linux_amd64.tar.gz -outfile glab.tar.gz \
+    && tar xzf glab.tar.gz bin/glab \
+    && mv bin/glab /usr/local/bin/glab \
+    && glab --version;
+
+##########################################
+# claude
+##########################################
+
+RUN curl -fsSL https://claude.ai/install.sh | bash \
+    && /root/.local/bin/claude --version;
+
+##########################################
+# codex
+##########################################
+
+RUN npm install -g @openai/codex \
+    && codex --version;
 
 ##########################################
 # hashicorp
@@ -203,15 +235,15 @@ RUN iwr https://github.com/gruntwork-io/terragrunt/releases/download/v0.99.4/ter
 # vault
 RUN apt-get install -y -q vault \
     && sudo apt-get install --reinstall -y -q vault \
-    && vault version
+    && vault version;
 
 # nomad
 RUN apt-get install -y -q nomad \
-    && nomad version
+    && nomad version;
 
 # consul
-RUN apt-get install -y -q nomad \
-    && nomad version
+RUN apt-get install -y -q consul \
+    && consul version;
 
 ##########################################
 # docker
