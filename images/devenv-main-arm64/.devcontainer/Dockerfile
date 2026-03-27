@@ -191,6 +191,21 @@ RUN apt install -y 1password-cli \
     && op --version
 
 ##########################################
+# github
+##########################################
+
+RUN gh --version;
+
+##########################################
+# gitlab
+##########################################
+
+RUN iwr https://gitlab.com/gitlab-org/cli/-/releases/v1.90.0/downloads/glab_1.90.0_linux_arm64.tar.gz -outfile glab.tar.gz \
+    && tar xzf glab.tar.gz bin/glab \
+    && mv bin/glab /usr/local/bin/glab \
+    && glab --version;
+
+##########################################
 # claude
 ##########################################
 
