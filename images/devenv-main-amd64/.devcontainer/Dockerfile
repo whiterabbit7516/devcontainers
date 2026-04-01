@@ -192,10 +192,10 @@ RUN apt install -y 1password-cli \
 # github
 ##########################################
 
-# RUN iwr https://github.com/cli/cli/releases/download/v2.89.0/gh_2.89.0_linux_amd64.tar.gz -outfile gh.tar.gz \
-#     && tar xzf gh.tar.gz gh_2.89.0_linux_amd64/bin/gh \
-#     && mv gh_2.89.0_linux_amd64/bin/gh /usr/local/bin/gh \
-#     && gh --version;
+RUN iwr https://github.com/cli/cli/releases/download/v2.89.0/gh_2.89.0_linux_amd64.tar.gz -outfile gh.tar.gz \
+    && tar xzf gh.tar.gz gh_2.89.0_linux_amd64/bin/gh \
+    && mv gh_2.89.0_linux_amd64/bin/gh /usr/local/bin/gh \
+    && gh --version;
 
 ##########################################
 # gitlab
