@@ -254,9 +254,10 @@ RUN apt-get install -y -q consul \
 # docker
 ##########################################
 
-RUN apt-get install -y -q docker.io docker-compose \
+RUN apt-get install -y -q docker.io docker-compose podman \
     && docker --version \
-    && docker-compose --version
+    && docker-compose --version \
+    && podman --version;
 
 ##########################################
 # aws
