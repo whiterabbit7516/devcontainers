@@ -351,6 +351,19 @@ RUN apt-get install -y -q postgresql-16 \
   && psql --version
 
 ##########################################
+# kafka
+##########################################
+
+RUN apt-get install -y -q kafkacat \
+  && kcat -V;
+
+RUN iwr https://github.com/deviceinsight/kafkactl/releases/download/v5.18.0/kafkactl_5.18.0_linux_arm64.tar.gz -outfile kafkactl.tar.gz \
+    && tar xzf kafkactl.tar.gz \
+    && chmod +x ./kafkactl \
+    && mv ./kafkactl /usr/local/bin/kafkactl \
+    && kafkactl version;
+
+##########################################
 # aztec/noir
 ##########################################
 
