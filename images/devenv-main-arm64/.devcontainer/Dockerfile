@@ -109,7 +109,7 @@ RUN apt-get install -y -q tshark termshark
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN /root/.cargo/bin/cargo version \
-  && ln -s /root/.cargo/bin/cargo /usr/local/bin/cargo \
+  && cp /root/.cargo/bin/cargo /usr/local/bin/cargo \
   && cargo version
 RUN apt-get install -y pkg-config
 
@@ -213,7 +213,8 @@ RUN iwr https://gitlab.com/gitlab-org/cli/-/releases/v1.90.0/downloads/glab_1.90
 ##########################################
 
 RUN curl -fsSL https://claude.ai/install.sh | bash \
-    && /root/.local/bin/claude --version;
+    && cp "$(readlink -f /root/.local/bin/claude)" /usr/local/bin/claude \
+    && claude --version;
 
 ##########################################
 # codex
