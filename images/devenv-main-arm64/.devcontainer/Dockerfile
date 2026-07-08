@@ -184,6 +184,16 @@ RUN npm install -g generator-code \
     && yo --generators
 
 ##########################################
+# tmux
+##########################################
+
+RUN apt-get install -y -q tmux \
+    && tmux -V;
+
+# tmux plugin manager
+RUN git clone --depth 1 https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm;
+
+##########################################
 # 1password
 ##########################################
 
