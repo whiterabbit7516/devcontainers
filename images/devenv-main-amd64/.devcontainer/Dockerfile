@@ -80,9 +80,8 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 # core utilities
 ##########################################
 
-RUN apt-get install -y -q tmux vim ranger fzf file pciutils direnv ripgrep jq \
+RUN apt-get install -y -q tmux vim ranger file pciutils direnv ripgrep jq \
     && tmux -V \
-    && fzf --version \
     && rg --version \
     && jq --version;
 
@@ -92,6 +91,13 @@ RUN iwr https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_amd64
   && chmod +x ./yq_linux_amd64 \
   && mv ./yq_linux_amd64 /usr/local/bin/yq \
   && /usr/local/bin/yq --version;
+
+# fzf (apt packaged version is out of date)
+RUN iwr https://github.com/junegunn/fzf/releases/download/v0.74.0/fzf-0.74.0-linux_amd64.tar.gz -outfile fzf.tar.gz \
+  && tar xzf fzf.tar.gz \
+  && chmod +x fzf \
+  && mv fzf /usr/local/bin/fzf \
+  && fzf --version;
 
 ##########################################
 # network utilities
