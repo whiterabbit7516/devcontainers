@@ -14,7 +14,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-28"
+ARG INVALIDATE_CACHE="counter-29"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -33,12 +33,14 @@ RUN apt-get update -q \
   && sudo apt-get install -y -q wget apt-transport-https software-properties-common
 
 # microsoft
+WORKDIR /devcontainer/build/microsoft/
 RUN wget -q https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb \
   && sudo dpkg -i packages-microsoft-prod.deb 
 # temporary until base:ubuntu-24.10 is available
 RUN add-apt-repository -y ppa:dotnet/backports
 
 # hashicorp
+WORKDIR /devcontainer/build/hashicorp/
 RUN wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
   && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
@@ -49,11 +51,13 @@ RUN apt-get install -y -q apt-transport-https ca-certificates curl \
     && echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.35/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 # teleport
+WORKDIR /devcontainer/build/teleport/
 RUN curl https://apt.releases.teleport.dev/gpg -o /usr/share/keyrings/teleport-archive-keyring.asc \
     && . /etc/os-release \
     && echo "deb [signed-by=/usr/share/keyrings/teleport-archive-keyring.asc] https://apt.releases.teleport.dev/${ID?} ${VERSION_CODENAME?} stable/v16" | sudo tee /etc/apt/sources.list.d/teleport.list > /dev/null
 
 # 1password
+WORKDIR /devcontainer/build/1password/
 RUN curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg \
   && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list \
   && sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/ \
@@ -69,6 +73,7 @@ RUN apt-get update -q;
 # powershell
 ##########################################
 
+WORKDIR /devcontainer/build/powershell/
 RUN curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.5.5/powershell-7.5.5-linux-arm64.tar.gz \
     && sudo mkdir -p /opt/microsoft/powershell/7 \
     && sudo tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7 \
@@ -88,6 +93,7 @@ RUN apt-get install -y -q tmux vim ranger file pciutils direnv ripgrep jq \
     && jq --version;
 
 # yq 
+WORKDIR /devcontainer/build/yq/
 RUN iwr https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_arm64.tar.gz -outfile yq.tar.gz \
   && tar xzf yq.tar.gz \
   && chmod +x ./yq_linux_arm64 \
@@ -95,6 +101,7 @@ RUN iwr https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_arm64
   && /usr/local/bin/yq --version;
 
 # fzf (apt packaged version is out of date)
+WORKDIR /devcontainer/build/fzf/
 RUN iwr https://github.com/junegunn/fzf/releases/download/v0.74.0/fzf-0.74.0-linux_arm64.tar.gz -outfile fzf.tar.gz \
   && tar xzf fzf.tar.gz \
   && chmod +x fzf \
@@ -113,6 +120,7 @@ RUN apt-get install -y -q tshark termshark
 # rust
 ##########################################
 
+WORKDIR /devcontainer/build/rust/
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN /root/.cargo/bin/cargo version \
   && ln -s /root/.cargo/bin/cargo /usr/local/bin/cargo \
@@ -167,6 +175,7 @@ RUN npm install --global @nestjs/cli prettier turbo oclif \
 # go
 ##########################################
 
+WORKDIR /devcontainer/build/go/
 RUN iwr https://go.dev/dl/go1.21.6.linux-arm64.tar.gz -outfile go.tar.gz \
   && tar -C /usr/local -xzf ./go.tar.gz \
   && /usr/local/go/bin/go version
@@ -197,6 +206,7 @@ RUN apt-get install -y -q tmux \
     && tmux -V;
 
 # tmux plugin manager
+WORKDIR /devcontainer/build/tmux/
 RUN git clone --depth 1 https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm;
 
 ##########################################
@@ -210,6 +220,7 @@ RUN apt install -y 1password-cli \
 # github
 ##########################################
 
+WORKDIR /devcontainer/build/github/
 RUN iwr https://github.com/cli/cli/releases/download/v2.89.0/gh_2.89.0_linux_arm64.tar.gz -outfile gh.tar.gz \
     && tar xzf gh.tar.gz gh_2.89.0_linux_arm64/bin/gh \
     && mv gh_2.89.0_linux_arm64/bin/gh /usr/local/bin/gh \
@@ -219,6 +230,7 @@ RUN iwr https://github.com/cli/cli/releases/download/v2.89.0/gh_2.89.0_linux_arm
 # gitlab
 ##########################################
 
+WORKDIR /devcontainer/build/gitlab/
 RUN iwr https://gitlab.com/gitlab-org/cli/-/releases/v1.90.0/downloads/glab_1.90.0_linux_arm64.tar.gz -outfile glab.tar.gz \
     && tar xzf glab.tar.gz bin/glab \
     && mv bin/glab /usr/local/bin/glab \
@@ -228,6 +240,7 @@ RUN iwr https://gitlab.com/gitlab-org/cli/-/releases/v1.90.0/downloads/glab_1.90
 # claude
 ##########################################
 
+WORKDIR /devcontainer/build/claude/
 RUN curl -fsSL https://claude.ai/install.sh | bash \
     && /root/.local/bin/claude --version;
 
@@ -247,6 +260,7 @@ RUN apt-get install -y -q terraform \
     && terraform version;
 
 # terragrunt
+WORKDIR /devcontainer/build/terragrunt/
 RUN iwr https://github.com/gruntwork-io/terragrunt/releases/download/v0.99.4/terragrunt_linux_arm64.tar.gz -outfile terragrunt.tar.gz \
     && tar xzf terragrunt.tar.gz \
     && chmod +x ./terragrunt_linux_arm64 \
@@ -279,6 +293,7 @@ RUN apt-get install -y -q docker.io docker-compose podman \
 # aws
 ##########################################
 
+WORKDIR /devcontainer/build/aws/
 RUN iwr "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -outfile "awscliv2.zip" \
     && unzip -q awscliv2.zip \
     && sudo ./aws/install \
@@ -293,24 +308,28 @@ RUN apt-get install -y -q kubectl \
     && kubectl version --client
 
 # k9s
+WORKDIR /devcontainer/build/k9s/
 RUN iwr https://github.com/derailed/k9s/releases/download/v0.50.18/k9s_Linux_arm64.tar.gz -outfile k9s.tar.gz \
     && tar xzf k9s.tar.gz k9s \
     && mv k9s /usr/local/bin/k9s \
     && k9s version
 
 # kubectx
+WORKDIR /devcontainer/build/kubectx/
 RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx_v0.9.4_linux_arm64.tar.gz -outfile kubectx.tar.gz \
     && tar xzf kubectx.tar.gz kubectx \
     && mv kubectx /usr/local/bin/kubectx \
     && kubectx --help
 
 # kubens
+WORKDIR /devcontainer/build/kubens/
 RUN iwr https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens_v0.9.4_linux_arm64.tar.gz -outfile kubens.tar.gz \
     && tar xzf kubens.tar.gz kubens \
     && mv kubens /usr/local/bin/kubens \
     && kubens --help
 
 # kubeseal
+WORKDIR /devcontainer/build/kubeseal/
 RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.28.0/kubeseal-0.28.0-linux-arm.tar.gz -outfile kubeseal.tar.gz \
     && tar xzf kubeseal.tar.gz kubeseal \
     && chmod +x ./kubeseal \
@@ -318,12 +337,14 @@ RUN iwr https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.28.0
     # && kubeseal --version # error: .buildkit_qemu_emulator: /usr/local/bin/kubeseal: Invalid ELF image for this architecture
 
 # helm
+WORKDIR /devcontainer/build/helm/
 RUN iwr https://get.helm.sh/helm-v3.17.0-linux-arm64.tar.gz -outfile helm.tar.gz \
     && tar xzf helm.tar.gz linux-arm64/helm \
     && mv linux-arm64/helm /usr/local/bin/helm \
     && helm version
 
 # argo cd
+WORKDIR /devcontainer/build/argo-cd/
 RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.7.2/argocd-linux-arm64 -outfile argocd \
     && chmod +x ./argocd \
     && mv ./argocd /usr/local/bin/argocd \
@@ -343,6 +364,7 @@ RUN apt-get install -y -q teleport \
 ##########################################
 
 # grpcurl
+WORKDIR /devcontainer/build/grpcurl/
 RUN iwr https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_arm64.tar.gz -outfile grpcurl.tar.gz \
     && tar xzf grpcurl.tar.gz \
     && chmod +x ./grpcurl \
@@ -350,6 +372,7 @@ RUN iwr https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl
     && grpcurl -version
 
 # grpcui
+WORKDIR /devcontainer/build/grpcui/
 RUN iwr https://github.com/fullstorydev/grpcui/releases/download/v1.3.1/grpcui_1.3.1_linux_arm64.tar.gz -outfile grpcui.tar.gz \
     && tar xzf grpcui.tar.gz \
     && chmod +x ./grpcui \
@@ -373,6 +396,7 @@ RUN apt-get install -y -q postgresql-16 \
 RUN apt-get install -y -q kafkacat \
   && kcat -V;
 
+WORKDIR /devcontainer/build/kafkactl/
 RUN iwr https://github.com/deviceinsight/kafkactl/releases/download/v5.18.0/kafkactl_5.18.0_linux_arm64.tar.gz -outfile kafkactl.tar.gz \
     && tar xzf kafkactl.tar.gz \
     && chmod +x ./kafkactl \
