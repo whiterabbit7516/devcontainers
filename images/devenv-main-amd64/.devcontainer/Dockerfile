@@ -14,7 +14,7 @@ FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-29"
+ARG INVALIDATE_CACHE="counter-30"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -85,8 +85,7 @@ SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 # core utilities
 ##########################################
 
-RUN apt-get install -y -q tmux vim ranger file pciutils direnv ripgrep jq \
-    && tmux -V \
+RUN apt-get install -y -q vim ranger file pciutils direnv ripgrep jq \
     && rg --version \
     && jq --version;
 
@@ -195,6 +194,17 @@ RUN npm install -g @devcontainers/cli \
 
 RUN npm install -g generator-code \
     && yo --generators
+
+##########################################
+# tmux
+##########################################
+
+WORKDIR /devcontainer/build/tmux/
+RUN apt-get install -y -q tmux \
+    && tmux -V;
+
+# tmux plugin manager
+RUN git clone --depth 1 https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm;
 
 ##########################################
 # 1password
