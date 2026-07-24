@@ -14,7 +14,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-30"
+ARG INVALIDATE_CACHE="counter-31"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -106,6 +106,13 @@ RUN iwr https://github.com/junegunn/fzf/releases/download/v0.74.0/fzf-0.74.0-lin
   && chmod +x fzf \
   && mv fzf /usr/local/bin/fzf \
   && fzf --version;
+
+# pkl
+WORKDIR /devcontainer/build/pkl/
+RUN iwr https://github.com/apple/pkl/releases/download/0.32.1/pkl-linux-aarch64 -outfile pkl \
+  && chmod +x pkl \
+  && mv pkl /usr/local/bin/pkl \
+  && pkl --version
 
 ##########################################
 # network utilities
