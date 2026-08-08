@@ -114,6 +114,13 @@ RUN iwr https://github.com/apple/pkl/releases/download/0.32.1/pkl-linux-aarch64 
   && mv pkl /usr/local/bin/pkl \
   && pkl --version
 
+# btop
+WORKDIR /devcontainer/build/btop/
+RUN iwr https://github.com/aristocratos/btop/releases/download/v1.4.7/btop-aarch64-unknown-linux-musl.tar.gz -outfile btop.tar.gz \
+  && tar xzf ./btop.tar.gz \
+  && chmod +x ./btop/bin/btop \
+  && mv ./btop/bin/btop /usr/local/bin/btop
+
 ##########################################
 # network utilities
 ##########################################
