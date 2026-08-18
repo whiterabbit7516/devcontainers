@@ -14,7 +14,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-33"
+ARG INVALIDATE_CACHE="counter-34"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -248,6 +248,14 @@ RUN iwr https://gitlab.com/gitlab-org/cli/-/releases/v1.90.0/downloads/glab_1.90
     && tar xzf glab.tar.gz bin/glab \
     && mv bin/glab /usr/local/bin/glab \
     && glab --version;
+
+##########################################
+# copilot
+##########################################
+
+WORKDIR /devcontainer/build/copilot/
+RUN npm install -g @github/copilot \
+    && copilot --version;
 
 ##########################################
 # claude
