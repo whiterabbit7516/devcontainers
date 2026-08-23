@@ -14,7 +14,7 @@ FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-34"
+ARG INVALIDATE_CACHE="counter-35"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -198,6 +198,17 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-amd64.tar.gz -outfile go.tar.gz \
 RUN apt-get install -y -q python3 python3-pip
 RUN python3 --version \
     && pip3 --version
+
+##########################################
+# kcl
+##########################################
+
+WORKDIR /devcontainer/build/kcl/
+RUN iwr https://github.com/kcl-lang/cli/releases/download/v0.12.8/kcl-v0.12.8-linux-amd64.tar.gz -outfile kcl.tar.gz \
+  && tar xzf kcl.tar.gz \
+  && chmod +x ./kcl \
+  && mv ./kcl /usr/local/bin/kcl \
+  && kcl --version
 
 ##########################################
 # vscode
