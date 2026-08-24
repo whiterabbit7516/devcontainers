@@ -14,7 +14,7 @@ FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-35"
+ARG INVALIDATE_CACHE="counter-36"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -253,7 +253,7 @@ RUN iwr https://github.com/cli/cli/releases/download/v2.89.0/gh_2.89.0_linux_amd
 ##########################################
 
 WORKDIR /devcontainer/build/gitlab/
-RUN iwr https://gitlab.com/gitlab-org/cli/-/releases/v1.90.0/downloads/glab_1.90.0_linux_amd64.tar.gz -outfile glab.tar.gz \
+RUN iwr https://gitlab.com/gitlab-org/cli/-/releases/v1.114.0/downloads/glab_1.114.0_linux_amd64.tar.gz -outfile glab.tar.gz \
     && tar xzf glab.tar.gz bin/glab \
     && mv bin/glab /usr/local/bin/glab \
     && glab --version;
@@ -339,7 +339,7 @@ RUN apt-get install -y -q kubectl \
 
 # k9s
 WORKDIR /devcontainer/build/k9s/
-RUN iwr https://github.com/derailed/k9s/releases/download/v0.50.18/k9s_Linux_amd64.tar.gz -outfile k9s.tar.gz \
+RUN iwr https://github.com/derailed/k9s/releases/download/v0.51.0/k9s_Linux_amd64.tar.gz -outfile k9s.tar.gz \
     && tar xzf k9s.tar.gz k9s \
     && mv k9s /usr/local/bin/k9s \
     && k9s version
