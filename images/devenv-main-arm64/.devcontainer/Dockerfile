@@ -14,7 +14,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-36"
+ARG INVALIDATE_CACHE="counter-37"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -232,6 +232,16 @@ RUN apt-get install -y -q tmux \
 
 # tmux plugin manager
 RUN git clone --depth 1 https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm;
+
+##########################################
+# cmux
+##########################################
+
+WORKDIR /devcontainer/build/cmux/
+RUN curl -fsSL https://cmux.com/tui/install.sh | sh \
+  && chmod +x /root/.local/bin/cmux \
+  && mv /root/.local/bin/cmux /usr/local/bin/cmux \
+  && cmux --version;
 
 ##########################################
 # 1password
