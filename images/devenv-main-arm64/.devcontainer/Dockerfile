@@ -239,8 +239,8 @@ RUN git clone --depth 1 https://github.com/tmux-plugins/tpm /root/.tmux/plugins/
 
 WORKDIR /devcontainer/build/cmux/
 RUN curl -fsSL https://cmux.com/tui/install.sh | sh \
-  && chmod +x /root/.local/bin/cmux \
-  && mv /root/.local/bin/cmux /usr/local/bin/cmux \
+  && chmod +x /root/.cmux/bin/cmux \
+  && mv /root/.cmux/bin/cmux /usr/local/bin/cmux \
   && cmux --version;
 
 ##########################################
