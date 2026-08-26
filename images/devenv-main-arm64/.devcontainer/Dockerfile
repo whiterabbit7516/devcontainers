@@ -93,7 +93,7 @@ RUN apt-get install -y -q vim ranger file pciutils direnv ripgrep jq \
 
 # yq 
 WORKDIR /devcontainer/build/yq/
-RUN iwr https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_arm64.tar.gz -outfile yq.tar.gz \
+RUN iwr https://github.com/mikefarah/yq/releases/latest/download/yq_linux_arm64.tar.gz -outfile yq.tar.gz \
   && tar xzf yq.tar.gz \
   && chmod +x ./yq_linux_arm64 \
   && mv ./yq_linux_arm64 /usr/local/bin/yq \
@@ -109,14 +109,14 @@ RUN iwr https://github.com/junegunn/fzf/releases/download/v0.74.0/fzf-0.74.0-lin
 
 # pkl
 WORKDIR /devcontainer/build/pkl/
-RUN iwr https://github.com/apple/pkl/releases/download/0.32.1/pkl-linux-aarch64 -outfile pkl \
+RUN iwr https://github.com/apple/pkl/releases/latest/download/pkl-linux-aarch64 -outfile pkl \
   && chmod +x pkl \
   && mv pkl /usr/local/bin/pkl \
   && pkl --version
 
 # btop
 WORKDIR /devcontainer/build/btop/
-RUN iwr https://github.com/aristocratos/btop/releases/download/v1.4.7/btop-aarch64-unknown-linux-musl.tar.gz -outfile btop.tar.gz \
+RUN iwr https://github.com/aristocratos/btop/releases/latest/download/btop-aarch64-unknown-linux-musl.tar.gz -outfile btop.tar.gz \
   && tar xzf ./btop.tar.gz \
   && chmod +x ./btop/bin/btop \
   && mv ./btop/bin/btop /usr/local/bin/btop
@@ -206,7 +206,7 @@ RUN python3 --version \
 ##########################################
 
 WORKDIR /devcontainer/build/kcl/
-RUN iwr https://github.com/kcl-lang/cli/releases/download/v0.12.8/kcl-v0.12.8-linux-arm64.tar.gz -outfile kcl.tar.gz \
+RUN iwr https://github.com/kcl-lang/cli/releases/latest/download/kcl-v0.12.8-linux-arm64.tar.gz -outfile kcl.tar.gz \
   && tar xzf kcl.tar.gz \
   && chmod +x ./kcl \
   && mv ./kcl /usr/local/bin/kcl \
@@ -322,7 +322,7 @@ RUN apt-get install -y -q terraform \
 
 # terragrunt
 WORKDIR /devcontainer/build/terragrunt/
-RUN iwr https://github.com/gruntwork-io/terragrunt/releases/download/v0.99.4/terragrunt_linux_arm64.tar.gz -outfile terragrunt.tar.gz \
+RUN iwr https://github.com/gruntwork-io/terragrunt/releases/latest/download/terragrunt_linux_arm64.tar.gz -outfile terragrunt.tar.gz \
     && tar xzf terragrunt.tar.gz \
     && chmod +x ./terragrunt_linux_arm64 \
     && mv ./terragrunt_linux_arm64 /usr/local/bin/terragrunt \
@@ -370,7 +370,7 @@ RUN apt-get install -y -q kubectl \
 
 # k9s
 WORKDIR /devcontainer/build/k9s/
-RUN iwr https://github.com/derailed/k9s/releases/download/v0.51.0/k9s_Linux_arm64.tar.gz -outfile k9s.tar.gz \
+RUN iwr https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_arm64.tar.gz -outfile k9s.tar.gz \
     && tar xzf k9s.tar.gz k9s \
     && mv k9s /usr/local/bin/k9s \
     && k9s version
@@ -406,14 +406,14 @@ RUN iwr https://get.helm.sh/helm-v3.17.0-linux-arm64.tar.gz -outfile helm.tar.gz
 
 # argo cd
 WORKDIR /devcontainer/build/argo-cd/
-RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.7.2/argocd-linux-arm64 -outfile argocd \
+RUN iwr https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-arm64 -outfile argocd \
     && chmod +x ./argocd \
     && mv ./argocd /usr/local/bin/argocd \
     && argocd version --client
 
 # vcluster
 WORKDIR /devcontainer/build/vcluster/
-RUN iwr https://github.com/loft-sh/vcluster/releases/download/v0.35.3/vcluster-linux-arm64 -outfile vcluster \
+RUN iwr https://github.com/loft-sh/vcluster/releases/latest/download/vcluster-linux-arm64 -outfile vcluster \
     && chmod +x ./vcluster \
     && mv ./vcluster /usr/local/bin/vcluster \
     && vcluster --version
