@@ -294,6 +294,13 @@ RUN npm install -g @openai/codex \
     && codex --version;
 
 ##########################################
+# opencode
+##########################################
+
+RUN npm install -g opencode-ai \
+    && opencode --version;
+
+##########################################
 # hashicorp
 ##########################################
 
