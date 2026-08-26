@@ -299,6 +299,18 @@ RUN npm install -g opencode-ai \
   && opencode --version;
 
 ##########################################
+# linear
+##########################################
+
+WORKDIR /devcontainer/build/linear/
+RUN iwr https://github.com/schpet/linear-cli/releases/latest/download/linear-x86_64-unknown-linux-gnu.tar.xz -outfile linear.tar.xz \
+  && tar -xJf ./linear.tar.xz \
+  && cd ./linear-x86_64-unknown-linux-gnu \
+  && chmod +x ./linear \
+  && mv ./linear /usr/local/bin/linear \
+  && linear --version
+
+##########################################
 # hashicorp
 ##########################################
 
