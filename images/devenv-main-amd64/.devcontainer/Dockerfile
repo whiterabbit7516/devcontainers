@@ -390,6 +390,13 @@ RUN iwr https://github.com/argoproj/argo-cd/releases/download/v2.9.18/argocd-lin
     && mv ./argocd /usr/local/bin/argocd \
     && argocd version --client
 
+# vcluster
+WORKDIR /devcontainer/build/vcluster/
+RUN iwr https://github.com/loft-sh/vcluster/releases/download/v0.35.3/vcluster-linux-amd64 -outfile vcluster \
+    && chmod +x ./vcluster \
+    && mv ./vcluster /usr/local/bin/vcluster \
+    && vcluster --version
+
 ##########################################
 # teleport
 ##########################################
