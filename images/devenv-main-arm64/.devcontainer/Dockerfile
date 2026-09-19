@@ -14,7 +14,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-37"
+ARG INVALIDATE_CACHE="counter-38"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -79,7 +79,9 @@ RUN curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/r
     && sudo tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7 \
     && sudo chmod +x /opt/microsoft/powershell/7/pwsh \
     && sudo ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh \
-    && pwsh --version
+    && pwsh --version;
+
+RUN pwsh -noni -nol -nop -c Install-Module PSReadLine,PSFzf,ZLocation,Powershell-Yaml -Scope AllUsers -Force;
 
 SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 
