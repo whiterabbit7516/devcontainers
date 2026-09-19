@@ -199,16 +199,16 @@ RUN apt-get install -y -q python3 python3-pip
 RUN python3 --version \
     && pip3 --version
 
-##########################################
-# kcl
-##########################################
+# ##########################################
+# # kcl
+# ##########################################
 
-WORKDIR /devcontainer/build/kcl/
-RUN iwr https://github.com/kcl-lang/cli/releases/latest/download/kcl-v0.12.8-linux-amd64.tar.gz -outfile kcl.tar.gz \
-  && tar xzf kcl.tar.gz \
-  && chmod +x ./kcl \
-  && mv ./kcl /usr/local/bin/kcl \
-  && kcl --version
+# WORKDIR /devcontainer/build/kcl/
+# RUN iwr https://github.com/kcl-lang/cli/releases/latest/download/kcl-v0.12.8-linux-amd64.tar.gz -outfile kcl.tar.gz \
+#   && tar xzf kcl.tar.gz \
+#   && chmod +x ./kcl \
+#   && mv ./kcl /usr/local/bin/kcl \
+#   && kcl --version
 
 ##########################################
 # vscode
