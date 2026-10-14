@@ -14,7 +14,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-39"
+ARG INVALIDATE_CACHE="counter-40"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -199,9 +199,10 @@ RUN iwr https://go.dev/dl/go1.21.6.linux-arm64.tar.gz -outfile go.tar.gz \
 # python
 ##########################################
 
-RUN apt-get install -y -q python3 python3-pip
-RUN python3 --version \
-    && pip3 --version
+RUN apt-get install -y -q python3 python3-pip pipenv \
+    && python3 --version \
+    && pip3 --version \
+    && pipenv --version
 
 # ##########################################
 # # kcl
