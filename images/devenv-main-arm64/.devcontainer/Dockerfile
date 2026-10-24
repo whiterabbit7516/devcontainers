@@ -14,7 +14,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-42"
+ARG INVALIDATE_CACHE="counter-43"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -468,6 +468,13 @@ RUN apt-get install -y -q protobuf-compiler protobuf-compiler-grpc libprotobuf-d
 
 RUN apt-get install -y -q postgresql-16 \
   && psql --version
+
+##########################################
+# redis
+##########################################
+
+RUN apt-get install -y -q redis \
+  && redis-cli --version;
 
 ##########################################
 # kafka
