@@ -14,7 +14,7 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-41"
+ARG INVALIDATE_CACHE="counter-42"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -230,8 +230,17 @@ RUN npm install -g generator-code \
 ##########################################
 
 WORKDIR /devcontainer/build/tmux/
-RUN apt-get install -y -q tmux \
-    && tmux -V;
+
+RUN iwr https://github.com/tmux/tmux-builds/releases/download/v3.7c/tmux-3.7c-linux-arm64.tar.gz -outfile tmux.tar.gz \
+  && tar xzf ./tmux.tar.gz \
+  && chown root:root ./tmux \
+  && chmod +x ./tmux \
+  && mv ./tmux /usr/local/bin/tmux \
+  && tmux -V;
+
+# too stale
+# RUN apt-get install -y -q tmux \
+#     && tmux -V;
 
 # tmux plugin manager
 RUN git clone --depth 1 https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm;
