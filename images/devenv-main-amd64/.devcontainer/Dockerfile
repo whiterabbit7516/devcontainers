@@ -14,7 +14,7 @@ FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ##########################################
 
-ARG INVALIDATE_CACHE="counter-43"
+ARG INVALIDATE_CACHE="counter-44"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ##########################################
@@ -77,7 +77,7 @@ RUN apt-get update -q
 RUN apt-get install -y -q powershell \
   && pwsh --version;
 
-RUN pwsh -noni -nol -nop -c Install-Module PSReadLine,PSFzf,ZLocation,Powershell-Yaml -Scope AllUsers -Force;
+RUN pwsh -noni -nol -nop -c Install-Module PSReadLine,PSFzf,ZLocation,Powershell-Yaml,pwsh-dotenv -Scope AllUsers -Force;
 
 SHELL ["/usr/bin/pwsh", "-nop", "-nol", "-c"]
 
