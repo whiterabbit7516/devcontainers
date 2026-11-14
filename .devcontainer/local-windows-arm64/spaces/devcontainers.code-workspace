@@ -1,11 +1,14 @@
 {
 	"folders": [
-		{
-			"path": "/workspace/repos/whiterabbit7516/devcontainers/"
-		},
-		{
-			"path": "/workspace/scratch/"
-		}
+    {
+      "path": "/workspace/repos/whiterabbit7516/devcontainers/"
+    },
+    {
+      "path": "/workspace/scratch/"
+    },
+    {
+      "path": "../../../images"
+    }
   ],
   "settings": {
     "window.titleSeparator": " | ",
