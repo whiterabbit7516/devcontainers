@@ -1,0 +1,25 @@
+vault token lookup
+vault status
+
+nomad namespace list
+nomad job status
+
+terragrunt init
+terragrunt plan
+terragrunt apply
+
+terraform init
+terraform plan
+terraform apply
+
+aws sso login
+aws sts get-caller-identity
+
+op vault list
+op whoami
+
+claude --continue
+claude --resume
+claude
+
+gh auth login
