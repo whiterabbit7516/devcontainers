@@ -491,6 +491,15 @@ RUN iwr https://github.com/deviceinsight/kafkactl/releases/download/v5.18.0/kafk
     && kafkactl version;
 
 ##########################################
+# solana
+##########################################
+
+# amd64 only
+# RUN ["/bin/bash", "-o", "pipefail", "-c", "curl -sSfL https://release.anza.xyz/stable/install | bash"]
+# RUN solana --version \
+#   && solana-keygen --version;
+
+##########################################
 # aztec/noir
 ##########################################
 
