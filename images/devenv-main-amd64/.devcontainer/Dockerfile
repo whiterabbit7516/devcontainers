@@ -490,11 +490,24 @@ RUN iwr https://github.com/deviceinsight/kafkactl/releases/download/v5.18.0/kafk
 # solana
 ################################################################################
 
-RUN curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash \
-  && /root/.cargo/bin/avm --version \
-  && /root/.cargo/bin/anchor --version \
-  && /root/.local/bin/surfpool --version \
+# erroring
+# RUN curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash \
+#   && /root/.cargo/bin/avm --version \
+#   && /root/.cargo/bin/anchor --version \
+#   && /root/.local/bin/surfpool --version \
+#   && /root/.local/share/solana/install/active_release/bin/solana --version;
+
+# solana cli
+RUN curl -sSfL https://release.anza.xyz/stable/install | bash \
   && /root/.local/share/solana/install/active_release/bin/solana --version;
+
+# anchor cli
+RUN curl -sSfL https://raw.githubusercontent.com/otter-sec/anchor/master/avm/install | sh \
+  && /root/.avm/bin/avm --version;
+
+# surfpool cli
+RUN curl --proto '=https' --tlsv1.2 -sSfL https://run.surfpool.run/ | bash \
+  && /root/.local/bin/surfpool --version;
 
 ################################################################################
 # sui
