@@ -490,17 +490,40 @@ RUN iwr https://github.com/deviceinsight/kafkactl/releases/download/v5.18.0/kafk
 # solana
 ################################################################################
 
-# solana cli
-RUN curl -sSfL https://release.anza.xyz/stable/install | bash \
+RUN curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash \
+  && /root/.cargo/bin/avm --version \
+  && /root/.cargo/bin/anchor --version \
+  && /root/.local/bin/surfpool --version \
   && /root/.local/share/solana/install/active_release/bin/solana --version;
 
-# anchor cli
-RUN curl -sSfL https://raw.githubusercontent.com/otter-sec/anchor/master/avm/install | sh \
-  && /root/.avm/bin/avm --version;
+################################################################################
+# sui
+################################################################################
 
-# surfpool cli
-RUN curl --proto '=https' --tlsv1.2 -sSfL https://run.surfpool.run/ | bash \
-  && /root/.local/bin/surfpool --version;
+RUN curl -sSfL https://raw.githubusercontent.com/Mystenlabs/suiup/main/install.sh | sh \
+  && /root/.local/bin/suiup --version \
+  && /root/.local/bin/suiup install sui@testnet \
+  && /root/.local/bin/sui --version;
+
+################################################################################
+# aptos
+################################################################################
+
+RUN curl -fsSL "https://aptos.dev/scripts/install_cli.sh" | sh \
+  && /root/.local/bin/aptos --version;
+
+################################################################################
+# ethereum
+################################################################################
+
+# foundry
+RUN curl -L https://foundry.paradigm.xyz | bash \
+  && /root/.foundry/bin/foundryup --version \
+  && /root/.foundry/bin/foundryup --install latest \
+  && /root/.foundry/bin/forge --version \
+  && /root/.foundry/bin/cast --version \
+  && /root/.foundry/bin/anvil --version \
+  && /root/.foundry/bin/chisel --version;
 
 ################################################################################
 # aztec/noir
