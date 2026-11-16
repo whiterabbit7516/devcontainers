@@ -490,8 +490,11 @@ RUN iwr https://github.com/deviceinsight/kafkactl/releases/download/v5.18.0/kafk
 # solana
 ##########################################
 
-RUN ["/bin/bash", "-o", "pipefail", "-c", "curl -sSfL https://release.anza.xyz/stable/install | bash"]
-RUN /root/.local/share/solana/install/active_release/bin/solana --version;
+RUN curl -sSfL https://release.anza.xyz/stable/install | bash \
+  && /root/.local/share/solana/install/active_release/bin/solana --version;
+
+RUN curl -sSfL https://raw.githubusercontent.com/otter-sec/anchor/master/avm/install | sh \
+  && /root/.avm/bin/avm --version
 
 ##########################################
 # aztec/noir
