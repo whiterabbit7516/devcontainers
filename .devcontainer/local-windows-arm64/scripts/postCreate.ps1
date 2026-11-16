@@ -1,14 +1,14 @@
 $ErrorActionPreference = "Stop"
-##########################################
+################################################################################
 # path
-##########################################
+################################################################################
 
 # populate path
 $ENV:PATH = "$($ENV:PATH):/workspace/mount/scripts/";
 
-##########################################
+################################################################################
 # helpers
-##########################################
+################################################################################
 
 function Seed-File {
   param(
@@ -42,9 +42,9 @@ function Seed-File {
   Copy-Item -LiteralPath $SourcePath -Destination $DestinationPath -Force -ErrorAction Stop
 }
 
-##########################################
+################################################################################
 # powershell
-##########################################
+################################################################################
 
 # fill console history
 Seed-File -SourcePath "/devcontainer/resources/PSReadLine/ConsoleHost_history.txt" -DestinationPath (Get-PSReadLineOption).HistorySavePath
@@ -54,21 +54,21 @@ if (-not (Get-Module -ListAvailable -Name PSFzf)) {
   pwsh -noni -nol -nop -c Install-Module -Scope AllUsers -Verbose -Force PSFzf;
 }
 
-##########################################
+################################################################################
 # git
-##########################################
+################################################################################
 
 Seed-File -SourcePath "/workspace/mount/config/git/config-seed" -DestinationPath "/root/.gitconfig"
 
-##########################################
+################################################################################
 # copilot
-##########################################
+################################################################################
 
 Seed-File -SourcePath "/workspace/mount/config/copilot/settings.json-seed" -DestinationPath "/root/.copilot/settings.json"
 
-##########################################
+################################################################################
 # claude
-##########################################
+################################################################################
 
 Seed-File -SourcePath "/workspace/mount/config/claude/claude.json-seed" -DestinationPath "/root/.claude.json"
 Seed-File -SourcePath "/workspace/mount/config/claude/settings.json-seed" -DestinationPath "/root/.claude/settings.json"
@@ -80,9 +80,9 @@ if (-not (Test-Path /root/.local/bin/claude)) {
   /root/.local/bin/claude --version
 }
 
-##########################################
+################################################################################
 # tmux plugin manager
-##########################################
+################################################################################
 
 # install only if not already cloned, as we mount a volume on .tmux
 if (-not (Test-Path /root/.tmux/plugins/tpm)) {
