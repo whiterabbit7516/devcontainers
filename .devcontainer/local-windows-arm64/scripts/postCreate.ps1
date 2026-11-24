@@ -47,7 +47,7 @@ function Seed-File {
 ################################################################################
 
 # fill console history
-Seed-File -SourcePath "/devcontainer/resources/PSReadLine/ConsoleHost_history.txt" -DestinationPath (Get-PSReadLineOption).HistorySavePath
+Seed-File -SourcePath "/devcontainer/resources/PSReadLine/ConsoleHost_history.txt-seed" -DestinationPath (Get-PSReadLineOption).HistorySavePath
 
 # fzf, install only if not already present
 if (-not (Get-Module -ListAvailable -Name PSFzf)) {
