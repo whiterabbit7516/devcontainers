@@ -14,7 +14,7 @@ FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:${IMAGE_VARIANT
 # cache invalidation
 ################################################################################
 
-ARG INVALIDATE_CACHE="counter-46"
+ARG INVALIDATE_CACHE="counter-47"
 ENV INVALIDATE_CACHE=${INVALIDATE_CACHE}
 
 ################################################################################
@@ -418,6 +418,14 @@ RUN iwr https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linu
     && chmod +x ./argocd \
     && mv ./argocd /usr/local/bin/argocd \
     && argocd version --client
+
+ # kargo
+WORKDIR /devcontainer/build/kargo/
+RUN $kargo_version = (Invoke-RestMethod https://akuity.github.io/kargo/1.12/version.txt).Trim(); `
+  iwr "https://github.com/akuity/kargo/releases/download/$kargo_version/kargo-linux-amd64" -outfile kargo `
+  && chmod +x ./kargo `
+  && mv ./kargo /usr/local/bin/kargo `
+  && kargo version;
 
 # vcluster
 WORKDIR /devcontainer/build/vcluster/
