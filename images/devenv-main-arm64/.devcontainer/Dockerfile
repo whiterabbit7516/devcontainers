@@ -425,10 +425,10 @@ RUN iwr https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linu
 
 # kargo
 WORKDIR /devcontainer/build/kargo/
-RUN $kargo_version = (Invoke-RestMethod https://akuity.github.io/kargo/1.12/version.txt).Trim(); `
-  iwr "https://github.com/akuity/kargo/releases/download/$kargo_version/kargo-linux-arm64" -outfile kargo `
-  && chmod +x ./kargo `
-  && mv ./kargo /usr/local/bin/kargo `
+RUN $kargo_version = (Invoke-RestMethod https://akuity.github.io/kargo/1.12/version.txt).Trim(); \
+  iwr "https://github.com/akuity/kargo/releases/download/$kargo_version/kargo-linux-arm64" -outfile kargo \
+  && chmod +x ./kargo \
+  && mv ./kargo /usr/local/bin/kargo \
   && kargo version;
 
 # vcluster
